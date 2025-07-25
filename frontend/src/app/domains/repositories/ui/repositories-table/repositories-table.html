@@ -1,0 +1,10 @@
+<div class="p-7">
+  <h2 class="text-4xl pb-7 font-extrabold dark:text-white">
+    Trending Repositories
+  </h2>
+  <app-table
+    appScrollNearEnd
+    (nearEnd)="onNearEnd()"
+    [data]="repositories()"
+  ></app-table>
+</div>

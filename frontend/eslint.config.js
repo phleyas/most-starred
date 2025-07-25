@@ -15,12 +15,18 @@ module.exports = tseslint.config(
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
       ...tseslint.configs.recommended,
-      ...tseslint.configs.stylistic,
       ...angular.configs.tsRecommended,
       eslintPluginPrettierRecommended,
     ],
     processor: angular.processInlineTemplates,
     rules: {
+      "prettier/prettier": [
+        "error",
+        {
+          endOfLine: "auto",
+        },
+      ],
+
       "@angular-eslint/directive-selector": [
         "error",
         {
