@@ -8,6 +8,8 @@
       <th scope="col" class="px-6 py-3">Description</th>
       <th scope="col" class="px-6 py-3">Stars</th>
       <th scope="col" class="px-6 py-3">Open issues</th>
+      <th scope="col" class="px-6 py-3">Created at</th>
+      <th scope="col" class="px-6 py-3">Updated at</th>
     </ng-container>
     <ng-container *appTableRow="repositories(); let row">
       <td
@@ -26,6 +28,8 @@
       <td class="px-6 py-4">{{ row.description }}</td>
       <td class="px-6 py-4">{{ row.stargazers_count }}</td>
       <td class="px-6 py-4">{{ row.open_issues_count }}</td>
+      <td class="px-6 py-4">{{ row.created_at }}</td>
+      <td class="px-6 py-4">{{ row.updated_at }}</td>
     </ng-container>
   </app-table>
 </div>

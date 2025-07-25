@@ -35,6 +35,8 @@ export class RepositoriesService {
           name: item.name,
           full_name: item.full_name,
           description: item.description,
+          created_at: new Date(item.created_at).toLocaleDateString(),
+          updated_at: new Date(item.updated_at).toLocaleDateString(),
           owner: {
             login: item.owner.login,
             avatar_url: item.owner.avatar_url,

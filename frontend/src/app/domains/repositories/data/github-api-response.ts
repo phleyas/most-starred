@@ -11,6 +11,8 @@ export interface GithubRepository {
   description: string | null;
   stargazers_count: number;
   open_issues_count: number;
+  updated_at: string;
+  created_at: string;
   owner: {
     login: string;
     avatar_url: string;
