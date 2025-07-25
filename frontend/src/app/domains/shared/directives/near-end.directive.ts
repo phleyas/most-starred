@@ -5,7 +5,6 @@ import {
   EventEmitter,
   inject,
   Input,
-  NgZone,
   Output,
   Renderer2,
 } from '@angular/core';
@@ -23,25 +22,21 @@ export class ScrollNearEndDirective implements AfterViewInit {
    */
   @Input() threshold = 100;
 
-  private window!: Window;
   private el: ElementRef = inject(ElementRef);
   private renderer: Renderer2 = inject(Renderer2);
-  private ngZone: NgZone = inject(NgZone);
   private scrollEl: HTMLElement | null = null;
   ngAfterViewInit(): void {
     // Wait for Angular to finish rendering projected content
-    this.ngZone.onStable.subscribe(() => {
-      const native = this.el.nativeElement as HTMLElement;
+    const native = this.el.nativeElement as HTMLElement;
 
-      this.scrollEl = native.querySelector('table') || native;
+    this.scrollEl = native.querySelector('table') || native;
 
-      this.renderer.setStyle(this.scrollEl, 'max-height', this.maxHeight);
-      this.renderer.setStyle(this.scrollEl, 'overflow-y', 'auto');
-      this.renderer.setStyle(this.scrollEl, 'display', 'block');
+    this.renderer.setStyle(this.scrollEl, 'max-height', this.maxHeight);
+    this.renderer.setStyle(this.scrollEl, 'overflow-y', 'auto');
+    this.renderer.setStyle(this.scrollEl, 'display', 'block');
 
-      this.scrollEl.addEventListener('scroll', this.onScroll, {
-        passive: true,
-      });
+    this.scrollEl.addEventListener('scroll', this.onScroll, {
+      passive: true,
     });
   }
   onScroll = (): void => {
