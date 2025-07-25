@@ -4,10 +4,17 @@ import { GithubRepository } from '../../data/github-api-response';
 import { TableComponent } from '../../../shared/ui/table/table';
 import { ScrollNearEndDirective } from '../../../shared/directives/near-end.directive';
 import { debounceTime, Subject, switchMap } from 'rxjs';
+import { TableHeaderTemplateDirective } from '../../../shared/directives/table-header-template.directive';
+import { TableRowTemplateDirective } from '../../../shared/directives/table-row-template.directive';
 
 @Component({
   selector: 'app-repositories-table',
-  imports: [TableComponent, ScrollNearEndDirective],
+  imports: [
+    TableComponent,
+    ScrollNearEndDirective,
+    TableHeaderTemplateDirective,
+    TableRowTemplateDirective,
+  ],
   templateUrl: './repositories-table.html',
   styleUrl: './repositories-table.scss',
 })

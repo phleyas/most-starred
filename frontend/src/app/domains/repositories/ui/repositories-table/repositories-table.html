@@ -2,9 +2,30 @@
   <h2 class="text-4xl pb-7 font-extrabold dark:text-white">
     Trending Repositories
   </h2>
-  <app-table
-    appScrollNearEnd
-    (nearEnd)="onNearEnd()"
-    [data]="repositories()"
-  ></app-table>
+  <app-table appScrollNearEnd (nearEnd)="onNearEnd()" [data]="repositories()">
+    <ng-container *appTableHeader>
+      <th scope="col" class="px-6 py-3">Name</th>
+      <th scope="col" class="px-6 py-3">Description</th>
+      <th scope="col" class="px-6 py-3">Stars</th>
+      <th scope="col" class="px-6 py-3">Open issues</th>
+    </ng-container>
+    <ng-container *appTableRow="repositories(); let row">
+      <td
+        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+      >
+        <img
+          class="w-10 h-10 rounded-full"
+          [src]="row.owner.avatar_url"
+          alt="avatar"
+        />
+        <div class="ps-3">
+          <div class="text-base font-semibold">{{ row.name }}</div>
+          <div class="font-normal text-gray-500">{{ row.owner.login }}</div>
+        </div>
+      </td>
+      <td class="px-6 py-4">{{ row.description }}</td>
+      <td class="px-6 py-4">{{ row.stargazers_count }}</td>
+      <td class="px-6 py-4">{{ row.open_issues_count }}</td>
+    </ng-container>
+  </app-table>
 </div>

@@ -5,26 +5,29 @@
     class="text-xs sticky top-0 text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
   >
     <tr>
-      <ng-container
-        *ngTemplateOutlet="
-          headers || defaultHeaderTemplate;
-          context: { $implicit: data }
-        "
-      ></ng-container>
+      @if (data) {
+        <ng-container
+          *ngTemplateOutlet="
+            headers || defaultHeaderTemplate;
+            context: { $implicit: data }
+          "
+        ></ng-container>
+      }
     </tr>
   </thead>
   <tbody>
-    <tr
-      class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-      *ngFor="let row of data"
-    >
-      <ng-container
-        *ngTemplateOutlet="
-          rows || defaultRowTemplate;
-          context: { $implicit: row }
-        "
-      ></ng-container>
-    </tr>
+    @for (row of data; track row) {
+      <tr
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+      >
+        <ng-container
+          *ngTemplateOutlet="
+            rows || defaultRowTemplate;
+            context: { $implicit: row }
+          "
+        ></ng-container>
+      </tr>
+    }
   </tbody>
 </table>
 
