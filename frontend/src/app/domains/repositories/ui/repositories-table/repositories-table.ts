@@ -1,27 +1,31 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { debounceTime, Subject, switchMap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RepositoriesService } from '../../data/repositories.service';
 import { GithubRepository } from '../../data/github-api-response';
 import { TableComponent } from '../../../shared/ui/table/table';
 import { ScrollNearEndDirective } from '../../../shared/directives/near-end.directive';
-import { debounceTime, Subject, switchMap } from 'rxjs';
 import { TableHeaderTemplateDirective } from '../../../shared/directives/table-header-template.directive';
 import { TableRowTemplateDirective } from '../../../shared/directives/table-row-template.directive';
+import { LoadingSpinner } from '../../../shared/ui/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-repositories-table',
   imports: [
     TableComponent,
+    LoadingSpinner,
     ScrollNearEndDirective,
     TableHeaderTemplateDirective,
     TableRowTemplateDirective,
   ],
   templateUrl: './repositories-table.html',
-  styleUrl: './repositories-table.scss',
 })
 export class RepositoriesTable implements OnInit {
   private readonly repositoriesService = inject(RepositoriesService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  protected repositories = signal<GithubRepository[]>([]);
+  protected readonly repositories = signal<GithubRepository[]>([]);
+  protected readonly isLoading = signal<boolean>(false);
   private page = 1;
 
   private readonly nearEndReached = new Subject<void>();
@@ -31,27 +35,42 @@ export class RepositoriesTable implements OnInit {
 
   private loadMoreRepositories$ = this.nearEndReached$.pipe(
     switchMap(() => {
+      this.isLoading.set(true);
       this.page++;
+
       return this.repositoriesService.getMostStarredRepositories(
-        '2017-10-22',
+        this.getLast30DaysDate(),
         this.page,
       );
     }),
   );
 
   async ngOnInit() {
+    this.isLoading.set(true);
+
     const response =
       await this.repositoriesService.getMostStarredRepositoriesPromise(
-        '2017-10-22',
+        this.getLast30DaysDate(),
       );
     this.repositories.set(response.items);
 
-    this.loadMoreRepositories$.subscribe((newResponse) => {
-      this.repositories.update((value) => value.concat(newResponse.items));
-    });
+    this.isLoading.set(false);
+
+    this.loadMoreRepositories$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((newResponse) => {
+        this.repositories.update((value) => value.concat(newResponse.items));
+        this.isLoading.set(false);
+      });
   }
 
-  onNearEnd() {
+  protected onNearEnd() {
     this.nearEndReached.next();
+  }
+
+  private getLast30DaysDate(): string {
+    const date = new Date();
+    date.setDate(date.getDate() - 30);
+    return date.toISOString().slice(0, 10);
   }
 }
