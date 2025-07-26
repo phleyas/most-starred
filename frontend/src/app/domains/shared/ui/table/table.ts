@@ -6,7 +6,6 @@ import { TableHeaderTemplateDirective } from '../../directives/table-header-temp
 @Component({
   selector: 'app-table',
   templateUrl: './table.html',
-  styleUrls: ['./table.scss'],
   imports: [CommonModule],
 })
 export class TableComponent<TItem extends object> {

@@ -5,6 +5,5 @@ import { RepositoriesTable } from '../../domains/repositories/ui/repositories-ta
   selector: 'app-home',
   imports: [RepositoriesTable],
   templateUrl: './home.html',
-  styleUrl: './home.scss',
 })
 export class Home {}

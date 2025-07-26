@@ -6,7 +6,6 @@ import { initFlowbite } from 'flowbite';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.scss',
 })
 export class App implements OnInit {
   ngOnInit(): void {
