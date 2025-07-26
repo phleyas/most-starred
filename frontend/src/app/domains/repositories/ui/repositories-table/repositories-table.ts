@@ -8,6 +8,8 @@ import { ScrollNearEndDirective } from '../../../shared/directives/near-end.dire
 import { TableHeaderTemplateDirective } from '../../../shared/directives/table-header-template.directive';
 import { TableRowTemplateDirective } from '../../../shared/directives/table-row-template.directive';
 import { LoadingSpinner } from '../../../shared/ui/loading-spinner/loading-spinner';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { RepositoryDetailsDialog } from '../repository-details-dialog/repository-details-dialog';
 
 @Component({
   selector: 'app-repositories-table',
@@ -17,12 +19,14 @@ import { LoadingSpinner } from '../../../shared/ui/loading-spinner/loading-spinn
     ScrollNearEndDirective,
     TableHeaderTemplateDirective,
     TableRowTemplateDirective,
+    DialogModule,
   ],
   templateUrl: './repositories-table.html',
 })
 export class RepositoriesTable implements OnInit {
   private readonly repositoriesService = inject(RepositoriesService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly dialog = inject(Dialog);
 
   protected readonly repositories = signal<GithubRepository[]>([]);
   protected readonly isLoading = signal<boolean>(false);
@@ -72,5 +76,15 @@ export class RepositoriesTable implements OnInit {
     const date = new Date();
     date.setDate(date.getDate() - 30);
     return date.toISOString().slice(0, 10);
+  }
+
+  protected onNameClicked(row: GithubRepository) {
+    this.dialog.open<RepositoryDetailsDialog, GithubRepository>(
+      RepositoryDetailsDialog,
+      {
+        minWidth: '300px',
+        data: row,
+      },
+    );
   }
 }
