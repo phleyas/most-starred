@@ -33,11 +33,15 @@
 
 <!-- If no template is provided use keys as headers and display all values -->
 <ng-template #defaultHeaderTemplate let-data>
-  <th scope="col" class="px-6 py-3" *ngFor="let header of data[0] | keyvalue">
-    {{ header.key }}
-  </th>
+  @for (header of data[0] | keyvalue; track header) {
+    <th scope="col" class="px-6 py-3">
+      {{ header.key }}
+    </th>
+  }
 </ng-template>
 
 <ng-template #defaultRowTemplate let-row>
-  <td class="px-6 py-4" *ngFor="let row of row | keyvalue">{{ row.value }}</td>
+  @for (row of row | keyvalue; track row) {
+    <td class="px-6 py-4">{{ row.value }}</td>
+  }
 </ng-template>
