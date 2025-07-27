@@ -28,8 +28,8 @@ export class RepositoriesTable implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly dialog = inject(Dialog);
 
-  protected readonly repositories = signal<GithubRepository[]>([]);
-  protected readonly isLoading = signal<boolean>(false);
+  public readonly repositories = signal<GithubRepository[]>([]);
+  public readonly isLoading = signal<boolean>(false);
   private page = 1;
 
   private readonly nearEndReached = new Subject<void>();
