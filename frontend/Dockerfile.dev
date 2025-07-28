@@ -1,0 +1,45 @@
+# =========================================
+# Stage 1: Development - Angular Application
+# =========================================
+
+# Define the Node.js version to use (Alpine for a small footprint)
+ARG NODE_VERSION=22.14.0-alpine
+
+# Set the base image for development
+FROM node:${NODE_VERSION} AS dev
+
+# Set environment variable to indicate development mode
+ENV NODE_ENV=development
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy only the dependency files first to optimize Docker caching
+COPY package.json package-lock.json ./
+
+# Install dependencies using npm with caching to speed up subsequent builds
+RUN --mount=type=cache,target=/root/.npm npm ci
+
+# Copy all application source files into the container
+COPY . .
+
+# Expose the port Angular uses for the dev server (default is 4200)
+EXPOSE 4200
+
+# Start the Angular dev server and bind it to all network interfaces
+CMD ["npm", "start", "--", "--host=0.0.0.0"]
+
+# Add a separate stage for testing
+FROM dev AS test
+# Install Chrome and dependencies (for running tests with Karma)
+RUN apk add --no-cache \
+  chromium \
+  udev \
+  ttf-freefont \
+  && ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
+
+# Set the CHROME_BIN environment variable
+ENV CHROME_BIN=/usr/bin/chromium-browser
+
+# Run tests using the npm test script
+CMD ["npm", "run", "test:headless"]
