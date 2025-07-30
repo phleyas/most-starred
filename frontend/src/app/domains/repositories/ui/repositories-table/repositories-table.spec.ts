@@ -36,7 +36,7 @@ describe('RepositoriesTable', () => {
     expect(spinner).toBeFalsy();
   });
 
-  it('should call onNameClicked when name button is clicked', () => {
+  it('should render table items', () => {
     // Provide mock data
     const mockRow = {
       id: 1,
