@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RepositoriesTable } from '../../domains/repositories/ui/repositories-table/repositories-table';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [RepositoriesTable],
+  imports: [RouterLink],
   templateUrl: './home.html',
 })
 export class Home {}

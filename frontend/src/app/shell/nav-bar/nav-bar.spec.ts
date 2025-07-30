@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Home } from './home';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NavBar } from './nav-bar';
 import { RouterTestingModule } from '@angular/router/testing';
-describe('Home', () => {
-  let component: Home;
-  let fixture: ComponentFixture<Home>;
+
+describe('NavBar', () => {
+  let component: NavBar;
+  let fixture: ComponentFixture<NavBar>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Home, HttpClientTestingModule, RouterTestingModule],
+      imports: [NavBar, RouterTestingModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Home);
+    fixture = TestBed.createComponent(NavBar);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
