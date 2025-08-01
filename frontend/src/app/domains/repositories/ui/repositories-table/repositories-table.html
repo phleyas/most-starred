@@ -1,5 +1,5 @@
-<div class="p-7">
-  <h2 class="text-4xl pb-7 font-extrabold dark:text-white">
+<div class="p-5">
+  <h2 class="text-4xl pb-5 font-extrabold dark:text-white">
     Trending Repositories
   </h2>
   <app-table appScrollNearEnd (nearEnd)="onNearEnd()" [data]="repositories()">
@@ -21,7 +21,9 @@
           alt="avatar"
         />
         <div class="ps-3">
-          <button (click)="onNameClicked(row)" class="text-base font-semibold">{{ row.name }}</button>
+          <button (click)="onNameClicked(row)" class="text-base font-semibold">
+            {{ row.name }}
+          </button>
           <div class="font-normal text-gray-500">{{ row.owner.login }}</div>
         </div>
       </td>

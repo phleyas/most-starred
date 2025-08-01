@@ -15,7 +15,7 @@ import {
 })
 export class ScrollNearEndDirective implements AfterViewInit {
   @Output() nearEnd: EventEmitter<void> = new EventEmitter<void>();
-  @Input() maxHeight = '500px';
+  @Input() maxHeight = '65vh';
 
   /**
    * threshold in PX when to emit before page end scroll
@@ -32,6 +32,7 @@ export class ScrollNearEndDirective implements AfterViewInit {
     this.scrollEl = native.querySelector('table') || native;
 
     this.renderer.setStyle(this.scrollEl, 'max-height', this.maxHeight);
+    this.renderer.setStyle(this.scrollEl, 'height', this.maxHeight);
     this.renderer.setStyle(this.scrollEl, 'overflow-y', 'auto');
     this.renderer.setStyle(this.scrollEl, 'display', 'block');
 
