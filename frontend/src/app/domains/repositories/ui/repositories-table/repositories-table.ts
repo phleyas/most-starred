@@ -10,6 +10,8 @@ import { TableRowTemplateDirective } from '../../../shared/directives/table-row-
 import { LoadingSpinner } from '../../../shared/ui/loading-spinner/loading-spinner';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { RepositoryDetailsDialog } from '../repository-details-dialog/repository-details-dialog';
+import { NgOptimizedImage } from '@angular/common';
+import { AvatarPlaceholder } from '../../../shared/ui/avatar-placeholder/avatar-placeholder';
 
 @Component({
   selector: 'app-repositories-table',
@@ -20,6 +22,8 @@ import { RepositoryDetailsDialog } from '../repository-details-dialog/repository
     TableHeaderTemplateDirective,
     TableRowTemplateDirective,
     DialogModule,
+    NgOptimizedImage,
+    AvatarPlaceholder,
   ],
   templateUrl: './repositories-table.html',
 })
