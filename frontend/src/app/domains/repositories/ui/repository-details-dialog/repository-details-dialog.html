@@ -34,11 +34,17 @@
     <!-- Modal body -->
     <div class="p-4 md:p-5 space-y-4">
       @if (data) {
-        <img
-          class="w-10 h-10 rounded-full"
-          [src]="data.owner.avatar_url"
-          alt="Rounded avatar"
-        />
+        @if (data.owner.avatar_url) {
+          <img
+            class="w-10 h-10 rounded-full"
+            [ngSrc]="data.owner.avatar_url"
+            height="10"
+            width="10"
+            alt="avatar"
+          />
+        } @else {
+          <app-avatar-placeholder />
+        }
 
         <dl
           class="grid grid-cols-2 gap-x-8 max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700"
