@@ -53,7 +53,7 @@ describe('RepositoriesTable', () => {
     fixture.detectChanges();
 
     const button = fixture.debugElement.query(By.css('button.text-base'));
-    const buttonText = button.nativeElement.textContent;
+    const buttonText = button.nativeElement.innerText;
     expect(buttonText).toBe('Repo');
   });
 });

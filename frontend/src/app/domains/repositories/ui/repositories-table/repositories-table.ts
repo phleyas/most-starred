@@ -34,7 +34,9 @@ export class RepositoriesTable implements OnInit {
 
   public readonly repositories = signal<GithubRepository[]>([]);
   public readonly isLoading = signal<boolean>(false);
+
   private page = 1;
+  private lastYearDate = this.getLastYearDate();
 
   private readonly nearEndReached = new Subject<void>();
   private readonly nearEndReached$ = this.nearEndReached
@@ -47,7 +49,7 @@ export class RepositoriesTable implements OnInit {
       this.page++;
 
       return this.repositoriesService.getMostStarredRepositories(
-        this.getLast30DaysDate(),
+        this.lastYearDate,
         this.page,
       );
     }),
@@ -57,8 +59,8 @@ export class RepositoriesTable implements OnInit {
     this.isLoading.set(true);
 
     const response =
-      await this.repositoriesService.getMostStarredRepositoriesPromise(
-        this.getLast30DaysDate(),
+      await this.repositoriesService.getMostStarredRepositoriesAsync(
+        this.lastYearDate,
       );
     this.repositories.set(response.items);
 
@@ -76,9 +78,9 @@ export class RepositoriesTable implements OnInit {
     this.nearEndReached.next();
   }
 
-  private getLast30DaysDate(): string {
+  private getLastYearDate(): string {
     const date = new Date();
-    date.setDate(date.getDate() - 30);
+    date.setDate(date.getDate() - 365);
     return date.toISOString().slice(0, 10);
   }
 

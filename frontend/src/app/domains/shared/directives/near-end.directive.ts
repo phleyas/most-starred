@@ -5,6 +5,7 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnDestroy,
   Output,
   Renderer2,
 } from '@angular/core';
@@ -13,9 +14,9 @@ import {
   selector: '[appScrollNearEnd]',
   standalone: true,
 })
-export class ScrollNearEndDirective implements AfterViewInit {
+export class ScrollNearEndDirective implements AfterViewInit, OnDestroy {
   @Output() nearEnd: EventEmitter<void> = new EventEmitter<void>();
-  @Input() maxHeight = '65vh';
+  @Input() maxHeight = '70vh';
 
   /**
    * threshold in PX when to emit before page end scroll
@@ -24,7 +25,12 @@ export class ScrollNearEndDirective implements AfterViewInit {
 
   private el: ElementRef = inject(ElementRef);
   private renderer: Renderer2 = inject(Renderer2);
-  private scrollEl: HTMLElement | null = null;
+  private scrollEl?: HTMLElement;
+
+  ngOnDestroy(): void {
+    this.scrollEl?.removeEventListener('scroll', this.onScroll.bind(this));
+  }
+
   ngAfterViewInit(): void {
     // Wait for Angular to finish rendering projected content
     const native = this.el.nativeElement as HTMLElement;
@@ -36,7 +42,8 @@ export class ScrollNearEndDirective implements AfterViewInit {
     this.renderer.setStyle(this.scrollEl, 'overflow-y', 'auto');
     this.renderer.setStyle(this.scrollEl, 'display', 'block');
 
-    this.scrollEl.addEventListener('scroll', this.onScroll, {
+    // Attach the scroll event listener
+    this.scrollEl.addEventListener('scroll', this.onScroll.bind(this), {
       passive: true,
     });
   }

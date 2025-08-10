@@ -59,7 +59,7 @@ export class RepositoriesService {
    * @param startDate Date string in YYYY-MM-DD format
    * @param page number starting from 1
    */
-  getMostStarredRepositoriesPromise(
+  getMostStarredRepositoriesAsync(
     startDate: string,
     page = 1,
   ): Promise<GithubApiResponse> {

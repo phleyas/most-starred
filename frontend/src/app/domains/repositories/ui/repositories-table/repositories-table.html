@@ -1,8 +1,5 @@
 <div class="p-5">
-  <h2 class="text-4xl pb-5 font-extrabold dark:text-white">
-    Trending Repositories
-  </h2>
-  <app-table appScrollNearEnd (nearEnd)="onNearEnd()" [data]="repositories()">
+  <app-table (nearEnd)="onNearEnd()" appScrollNearEnd [data]="repositories()">
     <ng-container *appTableHeader>
       <th scope="col" class="px-6 py-3">Name</th>
       <th scope="col" class="px-6 py-3">Description</th>
