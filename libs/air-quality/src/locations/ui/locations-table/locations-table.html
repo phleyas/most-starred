@@ -1,0 +1,22 @@
+<div class="p-5">
+  <shared-table [data]="locations()">
+    <ng-container *sharedTableHeader>
+      <th scope="col" class="px-6 py-3">Name</th>
+      <th scope="col" class="px-6 py-3">Locality</th>
+      <th scope="col" class="px-6 py-3">Country</th>
+      <th scope="col" class="px-6 py-3">Latitude</th>
+      <th scope="col" class="px-6 py-3">Longitude</th>
+      <th scope="col" class="px-6 py-3">Last measurement</th>
+      <th scope="col" class="px-6 py-3">Sensors</th>
+    </ng-container>
+    <ng-container *sharedTableRow="locations(); let row">
+      <td class="px-6 py-4">{{ row.name }}</td>
+      <td class="px-6 py-4">{{ row.locality }}</td>
+      <td class="px-6 py-4">{{ row.country?.name }}</td>
+      <td class="px-6 py-4">{{ row.coordinates?.latitude }}</td>
+      <td class="px-6 py-4">{{ row.coordinates?.longitude }}</td>
+      <td class="px-6 py-4">{{ row.datetimeLast?.local }}</td>
+      <td class="px-6 py-4">{{ row.sensors?.length }}</td>
+    </ng-container>
+  </shared-table>
+</div>
