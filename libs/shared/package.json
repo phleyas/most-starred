@@ -1,0 +1,13 @@
+{
+  "name": "@frontend/shared",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^20.1.0",
+    "@angular/core": "^20.1.0",
+    "@nx/angular": "21.4.1",
+    "vite": "^6.0.0",
+    "@analogjs/vite-plugin-angular": "~1.19.1",
+    "@nx/vite": "21.4.1"
+  },
+  "sideEffects": false
+}
