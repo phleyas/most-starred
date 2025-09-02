@@ -9,7 +9,8 @@
     "@analogjs/vite-plugin-angular": "~1.19.1",
     "@nx/vite": "21.4.1",
     "rxjs": "~7.8.0",
-    "@frontend/shared": "0.0.1"
+    "@frontend/shared": "0.0.1",
+    "@angular/forms": "~20.1.0"
   },
   "sideEffects": false
 }

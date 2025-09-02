@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@frontend/air-quality": ["libs/air-quality/src/index.ts"],
       "@frontend/open-api": ["libs/open-api/src/index.ts"],
       "@frontend/repositories": ["libs/repositories/src/index.ts"],
-      "@frontend/shared": ["libs/shared/src/index.ts"],
-      "@frontend/air-quality": ["libs/air-quality/src/index.ts"]
+      "@frontend/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
