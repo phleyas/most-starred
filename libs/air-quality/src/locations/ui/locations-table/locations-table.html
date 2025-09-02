@@ -2,7 +2,7 @@
   <div class="flex flex-col md:flex-row gap-4 pb-5">
     <shared-input [(ngModel)]="country" placeholder="Country" [pattern]="pattern"></shared-input>
     <shared-input [(ngModel)]="city" placeholder="City" [pattern]="pattern"></shared-input>
-    <shared-button (clicked)="onSearchClicked()" label="Search"></shared-button>
+    <shared-button [disabled]="disabled()" (clicked)="onSearchClicked()" label="Search"></shared-button>
   </div>
 
   <shared-table [data]="locations()">

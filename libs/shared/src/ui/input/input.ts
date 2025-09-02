@@ -82,7 +82,7 @@ export class Input implements ControlValueAccessor, Validator {
     const val = inputEl.value;
     const re = this.patternRegex();
 
-    if (re && !re.test(val)) {
+    if (re && val && !re.test(val)) {
       inputEl.value = this.lastValid(); // revert visible value
       return;
     }

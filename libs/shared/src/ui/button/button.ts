@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'shared-button',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './button.html',
   styleUrl: './button.css',
 })
