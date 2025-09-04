@@ -1,1 +1,1 @@
-export * from './locations/ui/locations-table/locations-table';
+export * from './ui/locations-table/locations-table';
