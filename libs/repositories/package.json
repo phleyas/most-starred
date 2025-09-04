@@ -10,7 +10,8 @@
     "@analogjs/vite-plugin-angular": "~1.19.1",
     "@nx/vite": "21.4.1",
     "@angular/cdk": "~20.1.0",
-    "@frontend/shared": "0.0.1"
+    "@frontend/shared": "0.0.1",
+    "@ngrx/signals": "^20.0.1"
   },
   "sideEffects": false
 }

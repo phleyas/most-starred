@@ -1,5 +1,5 @@
 <div class="p-5">
-  <shared-table (nearEnd)="onNearEnd()" sharedScrollNearEnd [data]="repositories()">
+  <shared-table (nearEnd)="onNearEnd()" sharedScrollNearEnd [data]="store.repositories()">
     <ng-container *sharedTableHeader>
       <th scope="col" class="px-6 py-3">Name</th>
       <th scope="col" class="px-6 py-3">Description</th>
@@ -8,7 +8,7 @@
       <th scope="col" class="px-6 py-3">Created at</th>
       <th scope="col" class="px-6 py-3">Updated at</th>
     </ng-container>
-    <ng-container *sharedTableRow="repositories(); let row">
+    <ng-container *sharedTableRow="store.repositories(); let row">
       <td class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
         @if (row.owner.avatar_url) {
         <img class="w-10 h-10 rounded-full" [ngSrc]="row.owner.avatar_url" height="10" width="10" alt="avatar" />
@@ -29,7 +29,7 @@
     </ng-container>
   </shared-table>
 
-  @if (isLoading()) {
+  @if (store.isLoading()) {
   <shared-loading-spinner />
   }
 </div>
