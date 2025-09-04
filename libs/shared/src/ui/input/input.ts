@@ -53,6 +53,7 @@ export class Input implements ControlValueAccessor, Validator {
       try {
         const re = typeof pat === 'string' ? new RegExp(pat) : pat;
         if (!re.test(v)) return 'Value does not match the required format.';
+      // eslint-disable-next-line no-empty
       } catch {}
     }
     return '';
@@ -60,10 +61,12 @@ export class Input implements ControlValueAccessor, Validator {
 
   hasError = computed(() => !!this.errorMessage() && (this.touched() || this.dirty()));
 
-  private onChange: (val: any) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  private onChange: (val: string) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
-  writeValue(val: any): void {
+  writeValue(val: string): void {
     const next = val ?? '';
     this.value.set(next);
     this.lastValid.set(next);
