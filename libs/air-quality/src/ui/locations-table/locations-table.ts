@@ -7,7 +7,7 @@ import {
   Button,
   LoadingSpinner,
 } from '@frontend/shared';
-import {LocationsService, SensorLocationDTO } from '@frontend/open-api';
+import { LocationsService, SensorLocationDTO } from '@frontend/open-api';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -40,15 +40,18 @@ export class LocationsTable {
     this.onSearchClicked();
   }
 
-  onSearchClicked() {
-    this.isLoading.set(true);
-    firstValueFrom(this.locationsService.getLocations(this.city(), this.country())).then(
-      response => {
-        if (response.locations) {
-          this.locations.set(response.locations);
-        }
-        this.isLoading.set(false);
+  async onSearchClicked() {
+    try {
+      this.isLoading.set(true);
+      const response = await firstValueFrom(this.locationsService.getLocations(this.city(), this.country()));
+      if (response.locations) {
+        this.locations.set(response.locations);
       }
-    );
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+      this.locations.set([]);
+    } finally {
+      this.isLoading.set(false);
+    }
   }
 }
