@@ -7,12 +7,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { AirQualityOpenAQContractsParameterDTO } from './airQualityOpenAQContractsParameterDTO';
+import { ParameterDTO } from './parameterDTO';
 
 
-export interface AirQualityOpenAQContractsSensorDTO { 
+export interface SensorDTO { 
     id?: number;
     name?: string;
-    parameter?: AirQualityOpenAQContractsParameterDTO | null;
+    parameter?: ParameterDTO | null;
 }
 

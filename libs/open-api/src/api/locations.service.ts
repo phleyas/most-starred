@@ -17,7 +17,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { AirQualityLocationsEndpointsLocationsResponse } from '../model/airQualityLocationsEndpointsLocationsResponse';
+import { LocationsResponse } from '../model/locationsResponse';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -41,10 +41,10 @@ export class LocationsService extends BaseService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public airQualityLocationsEndpointsGetLocations(city?: string, country?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<AirQualityLocationsEndpointsLocationsResponse>;
-    public airQualityLocationsEndpointsGetLocations(city?: string, country?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<AirQualityLocationsEndpointsLocationsResponse>>;
-    public airQualityLocationsEndpointsGetLocations(city?: string, country?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<AirQualityLocationsEndpointsLocationsResponse>>;
-    public airQualityLocationsEndpointsGetLocations(city?: string, country?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public getLocations(city?: string, country?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<LocationsResponse>;
+    public getLocations(city?: string, country?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<LocationsResponse>>;
+    public getLocations(city?: string, country?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<LocationsResponse>>;
+    public getLocations(city?: string, country?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -79,7 +79,7 @@ export class LocationsService extends BaseService {
 
         let localVarPath = `/locations`;
         const { basePath, withCredentials } = this.configuration;
-        return this.httpClient.request<AirQualityLocationsEndpointsLocationsResponse>('get', `${basePath}${localVarPath}`,
+        return this.httpClient.request<LocationsResponse>('get', `${basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

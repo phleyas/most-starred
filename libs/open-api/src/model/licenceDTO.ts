@@ -7,11 +7,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { AttributionDTO } from './attributionDTO';
 
 
-export interface AirQualityOpenAQContractsDateDTO { 
+export interface LicenceDTO { 
     id?: number;
-    utc?: string | null;
-    local?: string | null;
+    name?: string | null;
+    attribution?: AttributionDTO | null;
+    dateFrom?: string | null;
+    dateTo?: string | null;
 }
 

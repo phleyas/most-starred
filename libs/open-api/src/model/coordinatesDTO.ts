@@ -9,9 +9,9 @@
  */
 
 
-export interface AirQualityOpenAQContractsAttributionDTO { 
+export interface CoordinatesDTO { 
     id?: number;
-    name?: string | null;
-    url?: string | null;
+    latitude?: number;
+    longitude?: number;
 }
 

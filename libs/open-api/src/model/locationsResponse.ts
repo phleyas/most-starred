@@ -7,12 +7,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { SensorLocationDTO } from './sensorLocationDTO';
 
 
-export interface AirQualityOpenAQContractsParameterDTO { 
-    id?: number;
-    name?: string;
-    units?: string;
-    displayName?: string | null;
+export interface LocationsResponse { 
+    locations?: Array<SensorLocationDTO>;
 }
 

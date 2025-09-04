@@ -9,8 +9,10 @@
  */
 
 
-export interface AirQualityOpenAQContractsIdNameDTO { 
+export interface ParameterDTO { 
     id?: number;
-    name?: string | null;
+    name?: string;
+    units?: string;
+    displayName?: string | null;
 }
 
