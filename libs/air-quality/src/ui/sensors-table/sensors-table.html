@@ -7,10 +7,11 @@
       [pattern]="pattern"
       (focusOut)="handleFocus()"></shared-input>
     <shared-dropdown
+      [labelFn]="dropDownLabelFn"
       (clicked)="onDropdownClicked($event)"
       [disabled]="disabled()"
       [label]="selectedLocation()?.label ||'Select a location'"
-      [payload]="dropDownItems()"></shared-dropdown>
+      [payload]="dropDownItems()"/>
   </div>
 
   <shared-table [data]="sensors()">

@@ -11,7 +11,7 @@ import {
 import { LocationsService, LocationDTO, SensorDTO } from '@frontend/open-api';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DropdownPayload } from '@frontend/shared';
+import { DropdownPayload } from './dropdown.payload';
 
 @Component({
   selector: 'sensors-table',
@@ -51,6 +51,7 @@ export class SensorsTable {
   );
 
   selectedLocation = signal<DropdownPayload | undefined>(undefined);
+  dropDownLabelFn = (item: DropdownPayload) => item.label;
 
   constructor() {
     this.loadLocationsOnSearch();

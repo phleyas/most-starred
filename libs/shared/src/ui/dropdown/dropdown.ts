@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, input, output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DropdownPayload } from './dropdown.payload';
 import { Dropdown as FlowbiteDropdown } from 'flowbite';
 
 @Component({
@@ -9,27 +8,30 @@ import { Dropdown as FlowbiteDropdown } from 'flowbite';
   templateUrl: './dropdown.html',
   styleUrl: './dropdown.css',
 })
-export class Dropdown implements AfterViewInit {
+export class Dropdown<T = unknown> implements AfterViewInit {
   @ViewChild('dropdownMenu') menu!: ElementRef<HTMLElement>;
   @ViewChild('dropdownTrigger') trigger!: ElementRef<HTMLElement>;
+
+  label = input<string>('');
+  disabled = input<boolean>(false);
+  payload = input<T[]>([]);
+  clicked = output<T>();
 
   private dropdown?: FlowbiteDropdown;
   isOpen = false;
 
+  labelFn = input<(item: T) => string>((item: any) => item?.label ?? String(item));
+
   ngAfterViewInit(): void {
     this.dropdown = new FlowbiteDropdown(this.menu.nativeElement, this.trigger.nativeElement, { placement: 'bottom' });
   }
+
   toggleDropdown() {
     this.dropdown?.toggle();
     this.isOpen = !this.isOpen;
   }
-  label = input<string>('Select an option');
-  disabled = input<boolean>(false);
-  payload = input<DropdownPayload[]>([]);
-  clicked = output<DropdownPayload>();
 
-  onClicked(item: DropdownPayload) {
-    if (item.id === undefined) return;
+  onClicked(item: T) {
     this.toggleDropdown();
     this.clicked.emit(item);
   }

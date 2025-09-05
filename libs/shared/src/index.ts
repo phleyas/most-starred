@@ -7,4 +7,3 @@ export * from './ui/table/table';
 export * from './ui/input/input';
 export * from './ui/button/button';
 export * from './ui/dropdown/dropdown';
-export * from './ui/dropdown/dropdown.payload';
