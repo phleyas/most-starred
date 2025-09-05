@@ -1,0 +1,37 @@
+<div class="p-5">
+  <div class="flex flex-col md:flex-row gap-4 pb-5">
+    <shared-input [(ngModel)]="country" placeholder="Country" [pattern]="pattern"></shared-input>
+    <shared-input
+      [(ngModel)]="city"
+      placeholder="City"
+      [pattern]="pattern"
+      (focusOut)="handleFocus()"></shared-input>
+    <shared-dropdown
+      (clicked)="onDropdownClicked($event)"
+      [disabled]="disabled()"
+      [label]="selectedLocation()?.label ||'Select a location'"
+      [payload]="dropDownItems()"></shared-dropdown>
+  </div>
+
+  <shared-table [data]="sensors()">
+    <ng-container *sharedTableHeader>
+      <th scope="col" class="px-6 py-3">Name</th>
+      <th scope="col" class="px-6 py-3">First Datetime</th>
+      <th scope="col" class="px-6 py-3">Last Datetime</th>
+      <th scope="col" class="px-6 py-3">Latest</th>
+      <th scope="col" class="px-6 py-3">Description</th>
+      <th scope="col" class="px-6 py-3">Parameter</th>
+    </ng-container>
+    <ng-container *sharedTableRow="sensors(); let row">
+      <td class="px-6 py-4"><button (click)="onSensorClicked(row)" class="w-full text-left">{{ row.name }}</button></td>
+      <td class="px-6 py-4">{{ row.datetimeFirst?.local }}</td>
+      <td class="px-6 py-4">{{ row.datetimeLast?.local }}</td>
+      <td class="px-6 py-4">{{ row.latest?.value }}</td>
+      <td class="px-6 py-4">{{ row.parameter?.description ?? '' }}</td>
+      <td class="px-6 py-4">{{ row.parameter?.displayName }}</td>
+    </ng-container>
+  </shared-table>
+  @if (isLoading()) {
+  <shared-loading-spinner />
+  }
+</div>

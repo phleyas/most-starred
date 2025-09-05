@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, input, signal } from '@angular/core';
+import { Component, computed, forwardRef, input, output, signal } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -31,6 +31,7 @@ export class Input implements ControlValueAccessor, Validator {
   lastValid = signal('');
   placeholder = input('');
   pattern = input<string | undefined>(undefined);
+  focusOut = output<Event>();
 
   private patternRegex = computed(() => {
     const pat = this.pattern();
@@ -53,7 +54,7 @@ export class Input implements ControlValueAccessor, Validator {
       try {
         const re = typeof pat === 'string' ? new RegExp(pat) : pat;
         if (!re.test(v)) return 'Value does not match the required format.';
-      // eslint-disable-next-line no-empty
+        // eslint-disable-next-line no-empty
       } catch {}
     }
     return '';
@@ -66,6 +67,9 @@ export class Input implements ControlValueAccessor, Validator {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
+  handleFocus($event: Event) {
+    this.focusOut.emit($event);
+  }
   writeValue(val: string): void {
     const next = val ?? '';
     this.value.set(next);

@@ -1,7 +1,6 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { debounceTime, Subject, switchMap } from 'rxjs';
+import { debounceTime, Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { GithubApiService } from '../../data/github-api.service';
 import { GithubRepository } from '../../data/github-api-response';
 import { RepositoriesDetailsDialog } from '../repositories-details-dialog/repositories-details-dialog';
 import { NgOptimizedImage } from '@angular/common';
