@@ -7,12 +7,21 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { LatestDTO } from './latestDTO';
+import { SummaryDTO } from './summaryDTO';
+import { CoverageDTO } from './coverageDTO';
+import { DateDTO } from './dateDTO';
 import { ParameterDTO } from './parameterDTO';
 
 
 export interface SensorDTO { 
-    id?: number;
+    id?: number | null;
     name?: string;
     parameter?: ParameterDTO | null;
+    datetimeFirst?: DateDTO | null;
+    datetimeLast?: DateDTO | null;
+    coverage?: CoverageDTO | null;
+    latest?: LatestDTO | null;
+    summary?: SummaryDTO | null;
 }
 

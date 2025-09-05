@@ -14,5 +14,6 @@ export interface ParameterDTO {
     name?: string;
     units?: string;
     displayName?: string | null;
+    description?: string | null;
 }
 

@@ -7,10 +7,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { LocationDTO } from './locationDTO';
+import { ParameterDTO } from './parameterDTO';
 
 
-export interface LocationsResponse { 
-    locations?: Array<LocationDTO>;
+export interface ParametersResponse { 
+    parameters?: Array<ParameterDTO>;
 }
 

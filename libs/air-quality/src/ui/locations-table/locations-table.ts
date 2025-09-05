@@ -7,7 +7,7 @@ import {
   Button,
   LoadingSpinner,
 } from '@frontend/shared';
-import { LocationsService, SensorLocationDTO } from '@frontend/open-api';
+import { LocationsService, LocationDTO } from '@frontend/open-api';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -28,7 +28,7 @@ import { FormsModule } from '@angular/forms';
 export class LocationsTable {
   private readonly locationsService = inject(LocationsService);
 
-  public readonly locations = signal<SensorLocationDTO[]>([]);
+  public readonly locations = signal<LocationDTO[]>([]);
   public readonly isLoading = signal<boolean>(false);
 
   public readonly country = signal('Germany');

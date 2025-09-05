@@ -15,7 +15,7 @@ import { IdNameDTO } from './idNameDTO';
 import { DateDTO } from './dateDTO';
 
 
-export interface SensorLocationDTO { 
+export interface LocationDTO { 
     id?: number;
     name?: string | null;
     locality?: string | null;

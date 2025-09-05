@@ -7,10 +7,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { LocationDTO } from './locationDTO';
+import { CoordinatesDTO } from './coordinatesDTO';
+import { DateDTO } from './dateDTO';
 
 
-export interface LocationsResponse { 
-    locations?: Array<LocationDTO>;
+export interface LatestDTO { 
+    datetime?: DateDTO;
+    value?: number | null;
+    coordinates?: CoordinatesDTO;
 }
 
