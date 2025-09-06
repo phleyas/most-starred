@@ -1,6 +1,5 @@
 import { inject } from '@angular/core';
 import { GithubRepository } from '../../data/github-api-response';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
 import { GithubApiService } from '../../data/github-api.service';
 
