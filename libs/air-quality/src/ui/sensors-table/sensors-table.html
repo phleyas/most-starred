@@ -1,17 +1,13 @@
 <div class="p-5">
   <div class="flex flex-col md:flex-row gap-4 pb-5">
     <shared-input [(ngModel)]="country" placeholder="Country" [pattern]="pattern"></shared-input>
-    <shared-input
-      [(ngModel)]="city"
-      placeholder="City"
-      [pattern]="pattern"
-      (focusOut)="handleFocus()"></shared-input>
+    <shared-input [(ngModel)]="city" placeholder="City" [pattern]="pattern" (focusOut)="handleFocus()"></shared-input>
     <shared-dropdown
       [labelFn]="dropDownLabelFn"
       (clicked)="onDropdownClicked($event)"
       [disabled]="disabled()"
       [label]="selectedLocation()?.label ||'Select a location'"
-      [payload]="dropDownItems()"/>
+      [payload]="dropDownItems()" />
   </div>
 
   <shared-table [data]="sensors()">
@@ -35,4 +31,5 @@
   @if (isLoading()) {
   <shared-loading-spinner />
   }
+  <shared-chart [options]="chartOptions()" />
 </div>
