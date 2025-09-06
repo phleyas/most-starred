@@ -9,7 +9,6 @@
       [label]="selectedLocation()?.label ||'Select a location'"
       [payload]="dropDownItems()" />
   </div>
-
   <shared-table [data]="sensors()">
     <ng-container *sharedTableHeader>
       <th scope="col" class="px-6 py-3">Name</th>
@@ -21,15 +20,25 @@
     </ng-container>
     <ng-container *sharedTableRow="sensors(); let row">
       <td class="px-6 py-4"><button (click)="onSensorClicked(row)" class="w-full text-left">{{ row.name }}</button></td>
-      <td class="px-6 py-4">{{ row.datetimeFirst?.local }}</td>
-      <td class="px-6 py-4">{{ row.datetimeLast?.local }}</td>
-      <td class="px-6 py-4">{{ row.latest?.value }}</td>
+      <td class="px-6 py-4">{{ row.datetimeFirst?.local | date:'short' }}</td>
+      <td class="px-6 py-4">{{ row.datetimeLast?.local | date:'short' }}</td>
+      <td class="px-6 py-4">{{ row.latest?.value | number:'1.0-3' }}</td>
       <td class="px-6 py-4">{{ row.parameter?.description ?? '' }}</td>
       <td class="px-6 py-4">{{ row.parameter?.displayName }}</td>
     </ng-container>
   </shared-table>
+
+  <div class="flex flex-col md:flex-row gap-4 pb-5">
+    @if(sensors().length > 0 && chartOptions()) {
+    <div
+      class="max-w-sm p-6 mt-5 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <shared-chart [options]="chartOptions()" />
+    </div>
+    <sensors-card [sensors]="sensors()"></sensors-card>
+    }
+  </div>
+
   @if (isLoading()) {
   <shared-loading-spinner />
   }
-  <shared-chart [options]="chartOptions()" />
 </div>

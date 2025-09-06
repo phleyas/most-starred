@@ -10,11 +10,14 @@ import ApexCharts, { ApexOptions } from 'apexcharts';
 export class Chart {
   chart = viewChild<ElementRef<HTMLDivElement>>('chartView');
   options = input<ApexOptions>({});
+  private apexChart?: ApexCharts;
   constructor() {
     effect(() => {
-      if (this.chart()?.nativeElement && typeof ApexCharts !== 'undefined') {
-        const chart = new ApexCharts(this.chart()?.nativeElement, this.options());
-        chart.render();
+      if (!this.apexChart) {
+        this.apexChart = new ApexCharts(this.chart()?.nativeElement, this.options());
+        this.apexChart.render();
+      } else {
+        this.apexChart.updateOptions(this.options(), false, true);
       }
     });
   }
