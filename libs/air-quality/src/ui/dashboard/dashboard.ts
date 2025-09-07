@@ -74,10 +74,6 @@ export class Dashboard {
     this.loadLocationsOnSearch();
   }
 
-  onSensorClicked(sensor: SensorDTO) {
-    console.log('Sensor clicked:', sensor);
-  }
-
   handleFocus() {
     this.selectedLocation.set(undefined);
     this.sensors.set([]);

@@ -107,7 +107,7 @@ export class ChartBuilder {
     };
     return this;
   }
-  
+
   setLabels(labels: string[]): this {
     this.options.labels = labels;
     return this;

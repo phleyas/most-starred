@@ -7,16 +7,12 @@ import {
   Input,
   LoadingSpinner,
   Dropdown,
-  Chart,
 } from '@frontend/shared';
 import { LocationsService, LocationDTO, SensorDTO } from '@frontend/open-api';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DropdownPayload } from '../../data/dropdown.payload';
-import { ApexOptions } from 'apexcharts';
-import { ChartBuilder } from '@frontend/shared';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { SensorsCard } from '../sensors-card/sensors-card';
 
 @Component({
   selector: 'sensors-table',
@@ -30,8 +26,6 @@ import { SensorsCard } from '../sensors-card/sensors-card';
     FormsModule,
     LoadingSpinner,
     Dropdown,
-    Chart,
-    SensorsCard,
   ],
   templateUrl: './sensors-table.html',
   styleUrl: './sensors-table.css',
