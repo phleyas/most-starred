@@ -1,11 +1,13 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { AfterViewInit, Component, HostListener, inject, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { NavBar } from '../ui/nav-bar/nav-bar';
 import { initDropdowns, initFlowbite } from 'flowbite';
 import { Meta } from '@angular/platform-browser';
+import { Sidebar } from '../ui/sidebar/sidebar';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [RouterModule, NavBar],
+  imports: [RouterModule, NavBar, Sidebar, CommonModule],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -33,5 +35,18 @@ export class App implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     initFlowbite();
     initDropdowns();
+    // initDrawers();
+    // initOnLoad();
+    // initDismisses();
+  }
+  private router: Router = inject(Router);
+  isSmallScreen = window.innerWidth < 640;
+
+  get isAirQualityRouteActive(): boolean {
+    return this.router.url.startsWith('/air-quality');
+  }
+  @HostListener('window:resize')
+  onResize() {
+    this.isSmallScreen = window.innerWidth < 640;
   }
 }

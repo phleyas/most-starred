@@ -18,15 +18,20 @@ export const appRoutes: Route[] = [
     component: RepositoriesTable,
   },
   {
-    path: 'locations',
-    component: LocationsTable,
-  },
-  {
-    path: 'sensors',
-    component: SensorsTable,
-  },
-  {
-    path: 'dashboard',
-    component: Dashboard,
+    path: 'air-quality',
+    children: [
+      {
+        path: 'locations',
+        component: LocationsTable,
+      },
+      {
+        path: 'sensors',
+        component: SensorsTable,
+      },
+      {
+        path: 'dashboard',
+        component: Dashboard,
+      },
+    ],
   },
 ];
