@@ -1,0 +1,26 @@
+<div class="p-5">
+  <div class="flex flex-col md:flex-row gap-4 pb-5">
+    <shared-input [(ngModel)]="country" placeholder="Country" [pattern]="pattern"></shared-input>
+    <shared-input [(ngModel)]="city" placeholder="City" [pattern]="pattern" (focusOut)="handleFocus()"></shared-input>
+    <shared-dropdown
+      [labelFn]="dropDownLabelFn"
+      (clicked)="onDropdownClicked($event)"
+      [disabled]="disabled()"
+      [label]="selectedLocation()?.label ||'Select a location'"
+      [payload]="dropDownItems()" />
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-4 pb-5">
+    @if(sensors().length > 0 && chartOptions()) {
+    <div
+      class="max-w-sm p-6 mt-5 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <shared-chart [options]="chartOptions()" />
+    </div>
+    <sensors-card [sensors]="sensors()"></sensors-card>
+    }
+  </div>
+
+  @if (isLoading()) {
+  <shared-loading-spinner />
+  }
+</div>

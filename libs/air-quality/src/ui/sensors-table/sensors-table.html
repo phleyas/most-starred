@@ -28,16 +28,6 @@
     </ng-container>
   </shared-table>
 
-  <div class="flex flex-col md:flex-row gap-4 pb-5">
-    @if(sensors().length > 0 && chartOptions()) {
-    <div
-      class="max-w-sm p-6 mt-5 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-      <shared-chart [options]="chartOptions()" />
-    </div>
-    <sensors-card [sensors]="sensors()"></sensors-card>
-    }
-  </div>
-
   @if (isLoading()) {
   <shared-loading-spinner />
   }
