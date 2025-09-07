@@ -14,7 +14,6 @@ export class App implements OnInit, AfterViewInit {
   meta = inject(Meta);
   ngOnInit(): void {
     this.meta.addTags([
-      { name: 'robots', content: 'index,follow' },
       {
         name: 'description',
         content:
