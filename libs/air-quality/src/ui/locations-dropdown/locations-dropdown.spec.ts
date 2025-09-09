@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LocationsDropdown } from './locations-dropdown';
 
@@ -7,7 +8,7 @@ describe('LocationsDropdown', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LocationsDropdown],
+      imports: [LocationsDropdown, HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LocationsDropdown);

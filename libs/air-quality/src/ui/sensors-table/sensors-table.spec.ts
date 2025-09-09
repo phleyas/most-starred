@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SensorsTable } from './sensors-table';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SensorsTable', () => {
   let component: SensorsTable;
@@ -8,9 +9,8 @@ describe('SensorsTable', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SensorsTable]
-    })
-    .compileComponents();
+      imports: [SensorsTable, HttpClientTestingModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SensorsTable);
     component = fixture.componentInstance;
