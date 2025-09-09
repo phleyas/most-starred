@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { NavBar } from '../ui/nav-bar/nav-bar';
 import { initDropdowns, initFlowbite } from 'flowbite';
@@ -44,9 +44,5 @@ export class App implements OnInit, AfterViewInit {
 
   get isAirQualityRouteActive(): boolean {
     return this.router.url.startsWith('/air-quality');
-  }
-  @HostListener('window:resize')
-  onResize() {
-    this.isSmallScreen = window.innerWidth < 640;
   }
 }

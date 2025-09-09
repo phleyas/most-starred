@@ -12,7 +12,8 @@
     "@frontend/shared": "0.0.1",
     "@angular/forms": "~20.1.0",
     "apexcharts": "^5.3.4",
-    "@angular/common": "~20.1.0"
+    "@angular/common": "~20.1.0",
+    "@ngrx/signals": "^20.0.1"
   },
   "sideEffects": false
 }

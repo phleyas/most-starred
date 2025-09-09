@@ -1,5 +1,6 @@
 <div class="relative">
   <input
+    (keyup)="updateField($event)"
     (focusout)="handleFocus($event)"
     [value]="value()"
     (input)="handleInput($event)"

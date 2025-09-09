@@ -4,12 +4,13 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve shell",
-    "build": "npx nx run-many --target=build --all",
+    "build": "npx nx run-many --target=build --all --prod",
     "test": "npx nx run-many --target=test --all",
     "prettier": "npx prettier . --write"
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/ngrx-toolkit": "^20.4.0",
     "@angular/cdk": "~20.1.0",
     "@angular/common": "~20.1.0",
     "@angular/compiler": "~20.1.0",

@@ -7,7 +7,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'trending-repositories',
+    redirectTo: 'air-quality/dashboard',
   },
   {
     path: 'home',
@@ -21,16 +21,16 @@ export const appRoutes: Route[] = [
     path: 'air-quality',
     children: [
       {
-        path: 'locations',
-        component: LocationsTable,
+        path: 'dashboard',
+        component: Dashboard,
       },
       {
         path: 'sensors',
         component: SensorsTable,
       },
       {
-        path: 'dashboard',
-        component: Dashboard,
+        path: 'locations',
+        component: LocationsTable,
       },
     ],
   },

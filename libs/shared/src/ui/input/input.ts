@@ -32,6 +32,7 @@ export class Input implements ControlValueAccessor, Validator {
   placeholder = input('');
   pattern = input<string | undefined>(undefined);
   focusOut = output<Event>();
+  enterPressed = output<void>();
 
   private patternRegex = computed(() => {
     const pat = this.pattern();
@@ -66,7 +67,11 @@ export class Input implements ControlValueAccessor, Validator {
   private onChange: (val: string) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
-
+  updateField($event: KeyboardEvent) {
+    if ($event.key === 'Enter') {
+      this.enterPressed.emit();
+    }
+  }
   handleFocus($event: Event) {
     this.focusOut.emit($event);
   }

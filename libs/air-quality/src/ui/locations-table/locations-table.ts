@@ -1,4 +1,3 @@
-import { firstValueFrom } from 'rxjs';
 import {
   TableComponent,
   TableHeaderTemplateDirective,
@@ -7,9 +6,11 @@ import {
   Button,
   LoadingSpinner,
 } from '@frontend/shared';
-import { LocationsService, LocationDTO } from '@frontend/open-api';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LocationsStore } from '../../data/locations-store';
+import { Dispatcher } from '@ngrx/signals/events';
+import { locationsTableEvents } from './locations-table.events';
 
 @Component({
   selector: 'locations-table',
@@ -26,32 +27,22 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './locations-table.css',
 })
 export class LocationsTable {
-  private readonly locationsService = inject(LocationsService);
-
-  public readonly locations = signal<LocationDTO[]>([]);
-  public readonly isLoading = signal<boolean>(false);
-
-  public readonly country = signal('Germany');
-  public readonly city = signal('Cologne');
   public readonly pattern = '^[A-Za-zÄÖÜäöüß ]+$';
+  public readonly locationsStore = inject(LocationsStore);
+  public readonly dispatcher = inject(Dispatcher);
+  public readonly disabled = computed(
+    () => this.locationsStore.isLoading() || !this.locationsStore.city().trim() || !this.locationsStore.country().trim()
+  );
 
-  public readonly disabled = computed(() => this.isLoading() || !this.city() || !this.country());
-  constructor() {
-    this.onSearchClicked();
+  onSearchClicked() {
+    this.dispatcher.dispatch(locationsTableEvents.loadLocations());
   }
 
-  async onSearchClicked() {
-    try {
-      this.isLoading.set(true);
-      const response = await firstValueFrom(this.locationsService.getLocations(this.city(), this.country()));
-      if (response.locations) {
-        this.locations.set(response.locations);
-      }
-    } catch (error) {
-      console.error('Error fetching locations:', error);
-      this.locations.set([]);
-    } finally {
-      this.isLoading.set(false);
-    }
+  cityChanged($event: string) {
+    this.dispatcher.dispatch(locationsTableEvents.citySelected($event));
+  }
+
+  countryChanged($event: string) {
+    this.dispatcher.dispatch(locationsTableEvents.countrySelected($event));
   }
 }

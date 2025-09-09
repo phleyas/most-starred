@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -10,13 +10,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Sidebar {
   private router: Router = inject(Router);
-  isSmallScreen = window.innerWidth < 640;
-
   get isAirQualityRouteActive(): boolean {
     return this.router.url.startsWith('/air-quality');
-  }
-  @HostListener('window:resize')
-  onResize() {
-    this.isSmallScreen = window.innerWidth < 640;
   }
 }
