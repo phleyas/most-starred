@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { NavBar } from '../ui/nav-bar/nav-bar';
+import { NavBar } from '../ui/navbar/navbar';
 import { initDropdowns, initFlowbite } from 'flowbite';
 import { Meta } from '@angular/platform-browser';
 import { Sidebar } from '../ui/sidebar/sidebar';

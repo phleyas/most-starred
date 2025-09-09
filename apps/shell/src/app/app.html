@@ -1,9 +1,9 @@
-<app-nav-bar></app-nav-bar>
-<app-sidebar></app-sidebar>
+<app-navbar />
+<app-sidebar />
 <main
   class="pt-16 p-4"
   [ngClass]="{
     'sm:ml-64': isAirQualityRouteActive && !isSmallScreen
   }">
-  <router-outlet></router-outlet>
+  <router-outlet />
 </main>
