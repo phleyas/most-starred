@@ -35,8 +35,6 @@ export class RepositoriesTable implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly dialog = inject(Dialog);
 
-  public readonly repositories = signal<GithubRepository[]>([]);
-
   private readonly nearEndReached = new Subject<void>();
   private readonly nearEndReached$ = this.nearEndReached.asObservable().pipe(debounceTime(300));
 

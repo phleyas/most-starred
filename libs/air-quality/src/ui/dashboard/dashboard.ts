@@ -15,7 +15,7 @@ import { LocationsStore } from '../../data/locations-store';
 })
 export class Dashboard {
   public readonly sensorsStore = inject(SensorsStore);
-    public readonly locationsStore = inject(LocationsStore);
+  public readonly locationsStore = inject(LocationsStore);
 
   public readonly chartOptions = computed<ApexOptions>(() => {
     const series = this.sensorsStore

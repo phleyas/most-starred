@@ -40,7 +40,6 @@ export class App implements OnInit, AfterViewInit {
     // initDismisses();
   }
   private router: Router = inject(Router);
-  isSmallScreen = window.innerWidth < 640;
 
   get isAirQualityRouteActive(): boolean {
     return this.router.url.startsWith('/air-quality');

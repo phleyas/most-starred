@@ -11,7 +11,7 @@ import { SensorDTO } from '@frontend/open-api';
 export class SensorsCard {
   public readonly sensors = input<SensorDTO[]>([]);
 
-  private static readonly HEALTHY_RANGES: Record<string, string> = {
+  private readonly HEALTHY_RANGES: Record<string, string> = {
     no2: '0-40 µg/m³',
     pm10: '0-35 µg/m³',
     pm25: '0-20 µg/m³',
@@ -21,6 +21,6 @@ export class SensorsCard {
 
   healthyRange(sensor: SensorDTO): string {
     const key = sensor.parameter?.name?.toLowerCase();
-    return (key && SensorsCard.HEALTHY_RANGES[key]) || 'n/a';
+    return (key && this.HEALTHY_RANGES[key]) || 'n/a';
   }
 }
