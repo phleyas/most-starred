@@ -19,18 +19,27 @@ const initialState: RepositoriesState = {
 export const RepositoriesStore = signalStore(
   withState(initialState),
   withMethods((store, githubApiService = inject(GithubApiService)) => ({
+    setLoading(isLoading: boolean): void {
+      patchState(store, { isLoading });
+    },
+    concatRepositories(repositories: GithubRepository[]): void {
+      patchState(store, {
+        repositories: store.repositories().concat(repositories),
+      });
+    },
+    increasePage(): void {
+      patchState(store, { page: store.page() + 1 });
+    },
     async load(): Promise<void> {
-      patchState(store, { isLoading: true });
+      this.setLoading(true);
       try {
         const response = await githubApiService.getMostStarredRepositoriesAsync(lastYearDate, store.page());
-        patchState(store, {
-          repositories: store.repositories().concat(response.items),
-          isLoading: false,
-          page: store.page() + 1,
-        });
+        this.concatRepositories(response.items);
+        this.increasePage();
+        this.setLoading(false);
       } catch (error) {
         console.error('Error fetching repositories:', error);
-        patchState(store, { isLoading: false });
+        this.setLoading(false);
       }
     },
   })),
