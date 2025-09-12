@@ -1,11 +1,11 @@
 <div class="flex flex-col md:flex-row gap-4 pb-5">
   <shared-input
-    [ngModel]="locationsStore.country()"
+    [ngModel]="country()"
     (ngModelChange)="countryChanged($event)"
     placeholder="Country"
     [pattern]="pattern" />
   <shared-input
-    [ngModel]="locationsStore.city()"
+    [ngModel]="city()"
     (ngModelChange)="cityChanged($event)"
     placeholder="City"
     (focusOut)="reloadLocations()"
@@ -14,7 +14,7 @@
   <shared-dropdown
     [labelFn]="dropDownLabelFn"
     (clicked)="onDropdownClicked($event)"
-    [disabled]="disabled()"
+    [disabled]="isDisabled()"
     [label]="dropDownLabel()"
     [payload]="dropdownItems()" />
 </div>

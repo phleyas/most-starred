@@ -1,18 +1,19 @@
 import { catchError, filter, map, of, switchMap } from 'rxjs';
 import { signalStore, withHooks, withState } from '@ngrx/signals';
-import { LocationDTO, LocationsService } from '@frontend/open-api';
+import { LocationDTO } from '@frontend/open-api';
 import { inject } from '@angular/core';
 import { Dispatcher, Events, on, withEffects, withReducer } from '@ngrx/signals/events';
 import { locationsStoreEvents } from './locations-store.events';
 import { locationsTableEvents } from '../ui/locations-table/locations-table.events';
 import { locationsDropdownEvents } from '../ui/locations-dropdown/locations-dropdown.events';
+import { LocationsDataService } from './locations-data.service';
 
 type LocationsState = {
   city: string;
   country: string;
   locations: LocationDTO[];
   isLoading: boolean;
-  selectedLocationId?: number;
+  selectedLocationId: number | undefined;
 };
 
 const initialState: LocationsState = {
@@ -26,7 +27,7 @@ const initialState: LocationsState = {
 export const LocationsStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withEffects((store, events = inject(Events), locationsService = inject(LocationsService)) => ({
+  withEffects((store, events = inject(Events), locationDataService = inject(LocationsDataService)) => ({
     onLocationsSelected$: events.on(locationsStoreEvents.locationsLoaded).pipe(
       filter(locationsLoaded => locationsLoaded.payload.length > 0),
       map(locationsLoaded => {
@@ -40,8 +41,8 @@ export const LocationsStore = signalStore(
       .on(locationsTableEvents.loadLocations, locationsStoreEvents.loadLocations, locationsDropdownEvents.loadLocations)
       .pipe(
         switchMap(() =>
-          locationsService.getLocations(store.city(), store.country()).pipe(
-            map(response => locationsStoreEvents.locationsLoaded(response?.locations ?? [])),
+          locationDataService.getLocations(store.city(), store.country()).pipe(
+            map(response => locationsStoreEvents.locationsLoaded(response)),
             catchError((error: { message: string }) => of(locationsStoreEvents.locationsLoadedFailure(error.message)))
           )
         )

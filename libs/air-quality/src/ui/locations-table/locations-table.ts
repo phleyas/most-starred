@@ -33,6 +33,10 @@ export class LocationsTable {
   public readonly disabled = computed(
     () => this.locationsStore.isLoading() || !this.locationsStore.city().trim() || !this.locationsStore.country().trim()
   );
+  public readonly isLoading = computed(() => this.locationsStore.isLoading());
+  public readonly city = computed(() => this.locationsStore.city());
+  public readonly country = computed(() => this.locationsStore.country());
+  public readonly locations = computed(() => this.locationsStore.locations());
 
   onSearchClicked() {
     this.dispatcher.dispatch(locationsTableEvents.loadLocations());

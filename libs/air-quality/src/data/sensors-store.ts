@@ -1,12 +1,13 @@
 import { switchMap, map, catchError, of } from 'rxjs';
 import { signalStore, withState } from '@ngrx/signals';
-import { SensorDTO, SensorsService } from '@frontend/open-api';
+import { SensorDTO } from '@frontend/open-api';
 import { inject } from '@angular/core';
 import { Events, on, withEffects, withReducer } from '@ngrx/signals/events';
 import { locationsDropdownEvents } from '../ui/locations-dropdown/locations-dropdown.events';
 import { sensorsStoreEvents } from './sensors-store.events';
 import { locationsTableEvents } from '../ui/locations-table/locations-table.events';
 import { locationsStoreEvents } from './locations-store.events';
+import { SensorsDataService } from './sensors-data.service';
 
 type LocationsState = {
   isLoading: boolean;
@@ -21,13 +22,13 @@ const initialState: LocationsState = {
 export const SensorsStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withEffects((store, events = inject(Events), sensorsService = inject(SensorsService)) => ({
+  withEffects((store, events = inject(Events), sensorsDataService = inject(SensorsDataService)) => ({
     onLocationSelected$: events
       .on(locationsStoreEvents.locationSelected, locationsDropdownEvents.locationSelected)
       .pipe(
         switchMap(locationSelected =>
-          sensorsService.getSensors(locationSelected.payload).pipe(
-            map(response => sensorsStoreEvents.sensorsLoaded(response?.sensors ?? [])),
+          sensorsDataService.getSensors(locationSelected.payload).pipe(
+            map(response => sensorsStoreEvents.sensorsLoaded(response)),
             catchError((error: { message: string }) => of(sensorsStoreEvents.sensorsLoadedFailure(error.message)))
           )
         )

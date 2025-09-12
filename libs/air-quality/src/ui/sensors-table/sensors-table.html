@@ -1,7 +1,12 @@
 <div class="p-5">
-  <locations-dropdown />
+  <locations-dropdown
+    [country]="country()"
+    [city]="city()"
+    [locations]="locations()"
+    [selectedLocationId]="selectedLocationId()"
+    [disabled]="isLoading()" />
 
-  <shared-table [data]="sensorsStore.sensors()">
+  <shared-table [data]="sensors()">
     <ng-container *sharedTableHeader>
       <th scope="col" class="px-6 py-3">Name</th>
       <th scope="col" class="px-6 py-3">First Datetime</th>
@@ -10,7 +15,7 @@
       <th scope="col" class="px-6 py-3">Description</th>
       <th scope="col" class="px-6 py-3">Parameter</th>
     </ng-container>
-    <ng-container *sharedTableRow="sensorsStore.sensors(); let row">
+    <ng-container *sharedTableRow="sensors(); let row">
       <td class="px-6 py-4"><button (click)="onSensorClicked(row)" class="w-full text-left">{{ row.name }}</button></td>
       <td class="px-6 py-4">{{ row.datetimeFirst?.local | date:'short' }}</td>
       <td class="px-6 py-4">{{ row.datetimeLast?.local | date:'short' }}</td>
@@ -20,7 +25,7 @@
     </ng-container>
   </shared-table>
 
-  @if (locationsStore.isLoading() || sensorsStore.isLoading()) {
+  @if (isLoading()) {
   <shared-loading-spinner />
   }
 </div>

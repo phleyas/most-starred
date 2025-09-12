@@ -17,15 +17,22 @@ export class Dashboard {
   public readonly sensorsStore = inject(SensorsStore);
   public readonly locationsStore = inject(LocationsStore);
 
+  public readonly isLoading = computed(() => this.locationsStore.isLoading() || this.sensorsStore.isLoading());
+  public readonly city = computed(() => this.locationsStore.city());
+  public readonly country = computed(() => this.locationsStore.country());
+  public readonly selectedLocationId = computed(() => this.locationsStore.selectedLocationId());
+  public readonly locations = computed(() => this.locationsStore.locations());
+  public readonly sensors = computed(() => this.sensorsStore.sensors());
+
   public readonly chartOptions = computed<ApexOptions>(() => {
-    const series = this.sensorsStore
-      .sensors()
+    const sensors = this.sensors();
+    const series = sensors
       .map(sensor => sensor.latest?.value)
       .filter((v): v is number => typeof v === 'number' && Number.isFinite(v));
 
-    const labels = this.sensorsStore.sensors().map(sensor => sensor.parameter?.name ?? 'N/A');
+    const labels = sensors.map(sensor => sensor.parameter?.name ?? 'N/A');
 
-    const yAxis = this.sensorsStore.sensors().map(sensor => {
+    const yAxis = sensors.map(sensor => {
       return {
         min: sensor.summary?.min ?? 0,
         max: sensor.summary?.max ?? undefined,
