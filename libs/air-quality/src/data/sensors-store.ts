@@ -3,7 +3,7 @@ import { signalStore, withState } from '@ngrx/signals';
 import { SensorDTO, SensorsService } from '@frontend/open-api';
 import { inject } from '@angular/core';
 import { Events, on, withEffects, withReducer } from '@ngrx/signals/events';
-import { locationsdropDownEvents } from '../ui/locations-dropdown/locations-dropdown.events';
+import { locationsDropdownEvents } from '../ui/locations-dropdown/locations-dropdown.events';
 import { sensorsStoreEvents } from './sensors-store.events';
 import { locationsTableEvents } from '../ui/locations-table/locations-table.events';
 import { locationsStoreEvents } from './locations-store.events';
@@ -23,7 +23,7 @@ export const SensorsStore = signalStore(
   withState(initialState),
   withEffects((store, events = inject(Events), sensorsService = inject(SensorsService)) => ({
     onLocationSelected$: events
-      .on(locationsStoreEvents.locationSelected, locationsdropDownEvents.locationSelected)
+      .on(locationsStoreEvents.locationSelected, locationsDropdownEvents.locationSelected)
       .pipe(
         switchMap(locationSelected =>
           sensorsService.getSensors(locationSelected.payload).pipe(
@@ -36,14 +36,14 @@ export const SensorsStore = signalStore(
   withReducer(
     on(
       locationsTableEvents.citySelected,
-      locationsdropDownEvents.citySelected,
+      locationsDropdownEvents.citySelected,
       locationsTableEvents.countrySelected,
-      locationsdropDownEvents.countrySelected,
+      locationsDropdownEvents.countrySelected,
       (event, state) => ({
         sensors: [],
       })
     ),
-    on(locationsdropDownEvents.locationSelected, locationsStoreEvents.locationSelected, (event, state) => ({
+    on(locationsDropdownEvents.locationSelected, locationsStoreEvents.locationSelected, (event, state) => ({
       isLoading: true,
       sensors: [],
     })),

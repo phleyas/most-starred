@@ -4,13 +4,13 @@
       [ngModel]="locationsStore.country()"
       (ngModelChange)="countryChanged($event)"
       placeholder="Country"
-      [pattern]="pattern"></shared-input>
+      [pattern]="pattern" />
     <shared-input
       [ngModel]="locationsStore.city()"
       (ngModelChange)="cityChanged($event)"
       placeholder="City"
       (enterPressed)="onSearchClicked()"
-      [pattern]="pattern"></shared-input>
+      [pattern]="pattern" />
     <shared-button [disabled]="disabled()" (clicked)="onSearchClicked()" label="Search"></shared-button>
   </div>
 
@@ -34,6 +34,7 @@
       <td class="px-6 py-4">{{ row.sensors?.length }}</td>
     </ng-container>
   </shared-table>
+
   @if (locationsStore.isLoading()) {
   <shared-loading-spinner />
   }

@@ -5,7 +5,7 @@ import { inject } from '@angular/core';
 import { Dispatcher, Events, on, withEffects, withReducer } from '@ngrx/signals/events';
 import { locationsStoreEvents } from './locations-store.events';
 import { locationsTableEvents } from '../ui/locations-table/locations-table.events';
-import { locationsdropDownEvents } from '../ui/locations-dropdown/locations-dropdown.events';
+import { locationsDropdownEvents } from '../ui/locations-dropdown/locations-dropdown.events';
 
 type LocationsState = {
   city: string;
@@ -37,7 +37,7 @@ export const LocationsStore = signalStore(
       })
     ),
     onLoadLocations$: events
-      .on(locationsTableEvents.loadLocations, locationsStoreEvents.loadLocations, locationsdropDownEvents.loadLocations)
+      .on(locationsTableEvents.loadLocations, locationsStoreEvents.loadLocations, locationsDropdownEvents.loadLocations)
       .pipe(
         switchMap(() =>
           locationsService.getLocations(store.city(), store.country()).pipe(
@@ -48,23 +48,23 @@ export const LocationsStore = signalStore(
       ),
   })),
   withReducer(
-    on(locationsTableEvents.citySelected, locationsdropDownEvents.citySelected, (event, state) => ({
+    on(locationsTableEvents.citySelected, locationsDropdownEvents.citySelected, (event, state) => ({
       city: event.payload,
       selectedLocationId: undefined,
       locations: [],
     })),
-    on(locationsTableEvents.countrySelected, locationsdropDownEvents.countrySelected, (event, state) => ({
+    on(locationsTableEvents.countrySelected, locationsDropdownEvents.countrySelected, (event, state) => ({
       country: event.payload,
       selectedLocationId: undefined,
       locations: [],
     })),
-    on(locationsStoreEvents.locationSelected, locationsdropDownEvents.locationSelected, (event, state) => ({
+    on(locationsStoreEvents.locationSelected, locationsDropdownEvents.locationSelected, (event, state) => ({
       selectedLocationId: event.payload,
     })),
     on(
       locationsTableEvents.loadLocations,
       locationsStoreEvents.loadLocations,
-      locationsdropDownEvents.loadLocations,
+      locationsDropdownEvents.loadLocations,
       (event, state) => ({
         isLoading: true,
         locations: [],

@@ -1,4 +1,4 @@
-import { locationsdropDownEvents } from './locations-dropdown.events';
+import { locationsDropdownEvents } from './locations-dropdown.events';
 import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Dropdown, Input } from '@frontend/shared';
@@ -55,19 +55,19 @@ export class LocationsDropdown {
 
   onDropdownClicked($event: DropdownPayload) {
     if ($event.id) {
-      this.dispatcher.dispatch(locationsdropDownEvents.locationSelected($event.id));
+      this.dispatcher.dispatch(locationsDropdownEvents.locationSelected($event.id));
     }
   }
 
   reloadLocations() {
-    this.dispatcher.dispatch(locationsdropDownEvents.loadLocations());
+    this.dispatcher.dispatch(locationsDropdownEvents.loadLocations());
   }
 
   cityChanged($event: string) {
-    this.dispatcher.dispatch(locationsdropDownEvents.citySelected($event));
+    this.dispatcher.dispatch(locationsDropdownEvents.citySelected($event));
   }
 
   countryChanged($event: string) {
-    this.dispatcher.dispatch(locationsdropDownEvents.countrySelected($event));
+    this.dispatcher.dispatch(locationsDropdownEvents.countrySelected($event));
   }
 }

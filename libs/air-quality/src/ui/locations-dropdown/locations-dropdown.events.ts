@@ -1,7 +1,7 @@
 import { type } from '@ngrx/signals';
 import { eventGroup } from '@ngrx/signals/events';
 
-export const locationsdropDownEvents = eventGroup({
+export const locationsDropdownEvents = eventGroup({
   source: 'Locations dropdown',
   events: {
     loadLocations: type<void>(),
