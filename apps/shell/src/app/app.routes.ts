@@ -1,7 +1,5 @@
-import { Dashboard, LocationsTable, SensorsTable } from '@frontend/air-quality';
 import { Route } from '@angular/router';
 import { Home } from '../ui/home/home';
-import { RepositoriesTable } from '@frontend/repositories';
 
 export const appRoutes: Route[] = [
   {
@@ -15,22 +13,22 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'trending-repositories',
-    component: RepositoriesTable,
+    loadComponent: () => import('@frontend/repositories').then(m => m.RepositoriesTable),
   },
   {
     path: 'air-quality',
     children: [
       {
         path: 'dashboard',
-        component: Dashboard,
+        loadComponent: () => import('@frontend/air-quality').then(m => m.Dashboard),
       },
       {
         path: 'sensors',
-        component: SensorsTable,
+        loadComponent: () => import('@frontend/air-quality').then(m => m.SensorsTable),
       },
       {
         path: 'locations',
-        component: LocationsTable,
+        loadComponent: () => import('@frontend/air-quality').then(m => m.LocationsTable),
       },
     ],
   },
