@@ -35,9 +35,6 @@ export class App implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     initFlowbite();
     initDropdowns();
-    // initDrawers();
-    // initOnLoad();
-    // initDismisses();
   }
   private router: Router = inject(Router);
 

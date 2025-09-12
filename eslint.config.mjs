@@ -1,12 +1,20 @@
 import nx from '@nx/eslint-plugin';
+import angular from 'angular-eslint';
+import sonarjs from 'eslint-plugin-sonarjs';
+import tseslint from 'typescript-eslint';
 
 export default [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
+  ...angular.configs.tsRecommended,
   {
     ignores: ['**/dist', '**/vite.config.*.timestamp*', '**/vitest.config.*.timestamp*'],
   },
+  ...tseslint.configs.recommended.map(cfg => ({
+    files: ['**/*.ts', '**/*.tsx'],
+    ...cfg,
+  })),
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {
@@ -27,7 +35,7 @@ export default [
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts', '**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
-    // Override or add rules here
+    ...sonarjs.configs.recommended,
     rules: {},
   },
 ];

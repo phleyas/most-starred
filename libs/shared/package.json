@@ -4,11 +4,11 @@
   "peerDependencies": {
     "@angular/common": "^20.1.0",
     "@angular/core": "^20.1.0",
-    "@nx/angular": "21.4.1",
+    "@nx/angular": "^21.5.2",
     "vite": "^6.0.0",
-    "@analogjs/vite-plugin-angular": "~1.19.1",
-    "@nx/vite": "21.4.1",
-    "@angular/forms": "~20.1.0",
+    "@analogjs/vite-plugin-angular": "1.21.0",
+    "@nx/vite": "^21.5.2",
+    "@angular/forms": "20.3.0",
     "flowbite": "^3.1.2",
     "apexcharts": "^5.3.4"
   },

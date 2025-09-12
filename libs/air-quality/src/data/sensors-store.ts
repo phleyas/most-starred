@@ -22,7 +22,7 @@ const initialState: LocationsState = {
 export const SensorsStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withEffects((store, events = inject(Events), sensorsDataService = inject(SensorsDataService)) => ({
+  withEffects((_store, events = inject(Events), sensorsDataService = inject(SensorsDataService)) => ({
     onLocationSelected$: events
       .on(locationsStoreEvents.locationSelected, locationsDropdownEvents.locationSelected)
       .pipe(
@@ -40,19 +40,19 @@ export const SensorsStore = signalStore(
       locationsDropdownEvents.citySelected,
       locationsTableEvents.countrySelected,
       locationsDropdownEvents.countrySelected,
-      (event, state) => ({
+      () => ({
         sensors: [],
       })
     ),
-    on(locationsDropdownEvents.locationSelected, locationsStoreEvents.locationSelected, (event, state) => ({
+    on(locationsDropdownEvents.locationSelected, locationsStoreEvents.locationSelected, () => ({
       isLoading: true,
       sensors: [],
     })),
-    on(sensorsStoreEvents.sensorsLoaded, (event, state) => ({
+    on(sensorsStoreEvents.sensorsLoaded, (event) => ({
       isLoading: false,
       sensors: event.payload,
     })),
-    on(sensorsStoreEvents.sensorsLoadedFailure, (event, state) => ({
+    on(sensorsStoreEvents.sensorsLoadedFailure, () => ({
       isLoading: false,
       sensors: [],
     }))

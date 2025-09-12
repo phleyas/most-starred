@@ -20,6 +20,7 @@ export class Dropdown<T = unknown> implements AfterViewInit {
   private dropdown?: FlowbiteDropdown;
   isOpen = false;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   labelFn = input<(item: T) => string>((item: any) => item?.label ?? String(item));
 
   ngAfterViewInit(): void {

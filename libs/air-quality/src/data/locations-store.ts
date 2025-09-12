@@ -49,34 +49,34 @@ export const LocationsStore = signalStore(
       ),
   })),
   withReducer(
-    on(locationsTableEvents.citySelected, locationsDropdownEvents.citySelected, (event, state) => ({
+    on(locationsTableEvents.citySelected, locationsDropdownEvents.citySelected, event => ({
       city: event.payload,
       selectedLocationId: undefined,
       locations: [],
     })),
-    on(locationsTableEvents.countrySelected, locationsDropdownEvents.countrySelected, (event, state) => ({
+    on(locationsTableEvents.countrySelected, locationsDropdownEvents.countrySelected, event => ({
       country: event.payload,
       selectedLocationId: undefined,
       locations: [],
     })),
-    on(locationsStoreEvents.locationSelected, locationsDropdownEvents.locationSelected, (event, state) => ({
+    on(locationsStoreEvents.locationSelected, locationsDropdownEvents.locationSelected, event => ({
       selectedLocationId: event.payload,
     })),
     on(
       locationsTableEvents.loadLocations,
       locationsStoreEvents.loadLocations,
       locationsDropdownEvents.loadLocations,
-      (event, state) => ({
+      () => ({
         isLoading: true,
         locations: [],
       })
     ),
-    on(locationsStoreEvents.locationsLoaded, (event, state) => ({
+    on(locationsStoreEvents.locationsLoaded, event => ({
       isLoading: false,
       locations: event.payload,
       selectedLocationId: event.payload[0].id,
     })),
-    on(locationsStoreEvents.locationsLoadedFailure, (event, state) => ({
+    on(locationsStoreEvents.locationsLoadedFailure, () => ({
       isLoading: false,
       locations: [],
     }))

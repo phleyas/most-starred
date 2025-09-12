@@ -6,6 +6,7 @@
     "start": "nx serve shell",
     "build": "npx nx run-many --target=build --all --prod",
     "test": "npx nx run-many --target=test --all",
+    "lint": "npx nx run-many --target=lint --all --exclude=open-api --verbose",
     "prettier": "npx prettier . --write"
   },
   "private": true,
@@ -58,6 +59,7 @@
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-cypress": "^3.5.0",
+    "eslint-plugin-sonarjs": "^3.0.5",
     "jiti": "2.4.2",
     "jsdom": "~22.1.0",
     "jsonc-eslint-parser": "^2.1.0",
