@@ -1,22 +1,19 @@
-<div class="p-5">
-  <locations-dropdown
-    [disabled]="isLoading()"
-    [city]="city()"
-    [country]="country()"
-    [locations]="locations()"
-    [selectedLocationId]="selectedLocationId()" />
+<locations-dropdown
+  [disabled]="isLoading()"
+  [city]="city()"
+  [country]="country()"
+  [locations]="locations()"
+  [selectedLocationId]="selectedLocationId()" />
 
-  <div class="flex flex-col md:flex-row gap-4 pb-5">
-    @if(sensors().length > 0 && chartOptions()) {
-    <div
-      class="max-w-sm p-6 mt-5 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-      <shared-chart [options]="chartOptions()" />
-    </div>
-    <sensors-card [sensors]="sensors()" />
-    }
+<div class="flex flex-col md:flex-row gap-4 pb-5">
+  @if(sensors().length > 0 && chartOptions()) {
+  <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <shared-chart [options]="chartOptions()" />
   </div>
-
-  @if (isLoading()) {
-  <shared-loading-spinner />
+  <sensors-card [sensors]="sensors()" />
   }
 </div>
+
+@if (isLoading()) {
+<shared-loading-spinner />
+}

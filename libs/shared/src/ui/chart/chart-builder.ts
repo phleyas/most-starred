@@ -32,7 +32,7 @@ export class ChartBuilder {
 
     this.options.chart = {
       background: 'transparent',
-      height: height || '350px',
+      height: height || '320px',
       width: '100%',
       type,
       sparkline: {
@@ -49,7 +49,7 @@ export class ChartBuilder {
         },
         hollow: {
           margin: 0,
-          size: '32%',
+          size: '30%',
         },
       },
     };

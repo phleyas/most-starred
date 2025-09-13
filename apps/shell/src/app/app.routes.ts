@@ -5,7 +5,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'air-quality/dashboard',
+    redirectTo: 'air-quality',
   },
   {
     path: 'home',
@@ -18,6 +18,11 @@ export const appRoutes: Route[] = [
   {
     path: 'air-quality',
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard',
+      },
       {
         path: 'dashboard',
         loadComponent: () => import('@frontend/air-quality').then(m => m.Dashboard),

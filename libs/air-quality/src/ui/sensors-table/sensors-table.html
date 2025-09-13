@@ -1,31 +1,29 @@
-<div class="p-5">
-  <locations-dropdown
-    [country]="country()"
-    [city]="city()"
-    [locations]="locations()"
-    [selectedLocationId]="selectedLocationId()"
-    [disabled]="isLoading()" />
+<locations-dropdown
+  [country]="country()"
+  [city]="city()"
+  [locations]="locations()"
+  [selectedLocationId]="selectedLocationId()"
+  [disabled]="isLoading()" />
 
-  <shared-table [data]="sensors()">
-    <ng-container *sharedTableHeader>
-      <th scope="col" class="px-6 py-3">Name</th>
-      <th scope="col" class="px-6 py-3">First Datetime</th>
-      <th scope="col" class="px-6 py-3">Last Datetime</th>
-      <th scope="col" class="px-6 py-3">Latest</th>
-      <th scope="col" class="px-6 py-3">Description</th>
-      <th scope="col" class="px-6 py-3">Parameter</th>
-    </ng-container>
-    <ng-container *sharedTableRow="sensors(); let row">
-      <td class="px-6 py-4"><button (click)="onSensorClicked(row)" class="w-full text-left">{{ row.name }}</button></td>
-      <td class="px-6 py-4">{{ row.datetimeFirst?.local | date:'short' }}</td>
-      <td class="px-6 py-4">{{ row.datetimeLast?.local | date:'short' }}</td>
-      <td class="px-6 py-4">{{ row.latest?.value | number:'1.0-3' }}</td>
-      <td class="px-6 py-4">{{ row.parameter?.description ?? '' }}</td>
-      <td class="px-6 py-4">{{ row.parameter?.displayName }}</td>
-    </ng-container>
-  </shared-table>
+<shared-table [data]="sensors()">
+  <ng-container *sharedTableHeader>
+    <th scope="col" class="px-6 py-3">Name</th>
+    <th scope="col" class="px-6 py-3">First Datetime</th>
+    <th scope="col" class="px-6 py-3">Last Datetime</th>
+    <th scope="col" class="px-6 py-3">Latest</th>
+    <th scope="col" class="px-6 py-3">Description</th>
+    <th scope="col" class="px-6 py-3">Parameter</th>
+  </ng-container>
+  <ng-container *sharedTableRow="sensors(); let row">
+    <td class="px-6 py-4"><button (click)="onSensorClicked(row)" class="w-full text-left">{{ row.name }}</button></td>
+    <td class="px-6 py-4">{{ row.datetimeFirst?.local | date:'short' }}</td>
+    <td class="px-6 py-4">{{ row.datetimeLast?.local | date:'short' }}</td>
+    <td class="px-6 py-4">{{ row.latest?.value | number:'1.0-3' }}</td>
+    <td class="px-6 py-4">{{ row.parameter?.description ?? '' }}</td>
+    <td class="px-6 py-4">{{ row.parameter?.displayName }}</td>
+  </ng-container>
+</shared-table>
 
-  @if (isLoading()) {
-  <shared-loading-spinner />
-  }
-</div>
+@if (isLoading()) {
+<shared-loading-spinner />
+}

@@ -1,41 +1,39 @@
-<div class="p-5">
-  <div class="flex flex-col md:flex-row gap-4 pb-5">
-    <shared-input
-      [ngModel]="country()"
-      (ngModelChange)="countryChanged($event)"
-      placeholder="Country"
-      [pattern]="pattern" />
-    <shared-input
-      [ngModel]="city()"
-      (ngModelChange)="cityChanged($event)"
-      placeholder="City"
-      (enterPressed)="onSearchClicked()"
-      [pattern]="pattern" />
-    <shared-button [disabled]="disabled()" (clicked)="onSearchClicked()" label="Search"></shared-button>
-  </div>
-
-  <shared-table [data]="locations()">
-    <ng-container *sharedTableHeader>
-      <th scope="col" class="px-6 py-3">Name</th>
-      <th scope="col" class="px-6 py-3">Locality</th>
-      <th scope="col" class="px-6 py-3">Country</th>
-      <th scope="col" class="px-6 py-3">Latitude</th>
-      <th scope="col" class="px-6 py-3">Longitude</th>
-      <th scope="col" class="px-6 py-3">Last measurement</th>
-      <th scope="col" class="px-6 py-3">Sensors</th>
-    </ng-container>
-    <ng-container *sharedTableRow="locations(); let row">
-      <td class="px-6 py-4">{{ row.name }}</td>
-      <td class="px-6 py-4">{{ row.locality }}</td>
-      <td class="px-6 py-4">{{ row.country?.name }}</td>
-      <td class="px-6 py-4">{{ row.coordinates?.latitude }}</td>
-      <td class="px-6 py-4">{{ row.coordinates?.longitude }}</td>
-      <td class="px-6 py-4">{{ row.datetimeLast?.local }}</td>
-      <td class="px-6 py-4">{{ row.sensors?.length }}</td>
-    </ng-container>
-  </shared-table>
-
-  @if (isLoading()) {
-  <shared-loading-spinner />
-  }
+<div class="flex flex-col md:flex-row gap-4 pb-2">
+  <shared-input
+    [ngModel]="country()"
+    (ngModelChange)="countryChanged($event)"
+    placeholder="Country"
+    [pattern]="pattern" />
+  <shared-input
+    [ngModel]="city()"
+    (ngModelChange)="cityChanged($event)"
+    placeholder="City"
+    (enterPressed)="onSearchClicked()"
+    [pattern]="pattern" />
+  <shared-button [disabled]="disabled()" (clicked)="onSearchClicked()" label="Search"></shared-button>
 </div>
+
+<shared-table [data]="locations()">
+  <ng-container *sharedTableHeader>
+    <th scope="col" class="px-6 py-3">Name</th>
+    <th scope="col" class="px-6 py-3">Locality</th>
+    <th scope="col" class="px-6 py-3">Country</th>
+    <th scope="col" class="px-6 py-3">Latitude</th>
+    <th scope="col" class="px-6 py-3">Longitude</th>
+    <th scope="col" class="px-6 py-3">Last measurement</th>
+    <th scope="col" class="px-6 py-3">Sensors</th>
+  </ng-container>
+  <ng-container *sharedTableRow="locations(); let row">
+    <td class="px-6 py-4">{{ row.name }}</td>
+    <td class="px-6 py-4">{{ row.locality }}</td>
+    <td class="px-6 py-4">{{ row.country?.name }}</td>
+    <td class="px-6 py-4">{{ row.coordinates?.latitude }}</td>
+    <td class="px-6 py-4">{{ row.coordinates?.longitude }}</td>
+    <td class="px-6 py-4">{{ row.datetimeLast?.local }}</td>
+    <td class="px-6 py-4">{{ row.sensors?.length }}</td>
+  </ng-container>
+</shared-table>
+
+@if (isLoading()) {
+<shared-loading-spinner />
+}
