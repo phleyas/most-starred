@@ -2,6 +2,19 @@
   "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
   "spaces": 2,
   "generator-cli": {
-    "version": "7.15.0"
+    "version": "7.15.0",
+    "generators": {
+      "v2.0": {
+        "generatorName": "typescript-angular",
+        "output": "#{cwd}/libs/open-api/src",
+        "glob": "swagger.json",
+        "additionalProperties": {
+          "ngVersion": "20.3.0",
+          "supportsES6": "true",
+          "npmVersion": "11.6.0",
+          "signals": true
+        }
+      }
+    }
   }
 }

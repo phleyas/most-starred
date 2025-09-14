@@ -21,7 +21,7 @@
           }
         ],
         "define": {
-          "MY_API_URL": "\"https://api.ignaciokoestner.de\""
+          "API_BASE_URL": "\"https://api.ignaciokoestner.de\""
         },
         "styles": ["apps/shell/src/styles.css"]
       },

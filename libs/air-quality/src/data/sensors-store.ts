@@ -8,6 +8,9 @@ import { sensorsStoreEvents } from './sensors-store.events';
 import { locationsTableEvents } from '../ui/locations-table/locations-table.events';
 import { locationsStoreEvents } from './locations-store.events';
 import { SensorsDataService } from './sensors-data.service';
+import { environment } from './../environments/environment';
+
+export const withTreeShakableDevTools = environment.storeWithDevTools;
 
 type LocationsState = {
   isLoading: boolean;
@@ -22,6 +25,7 @@ const initialState: LocationsState = {
 export const SensorsStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
+  withTreeShakableDevTools('Sensors Store'),
   withEffects((_store, events = inject(Events), sensorsDataService = inject(SensorsDataService)) => ({
     onLocationSelected$: events
       .on(locationsStoreEvents.locationSelected, locationsDropdownEvents.locationSelected)
@@ -48,7 +52,7 @@ export const SensorsStore = signalStore(
       isLoading: true,
       sensors: [],
     })),
-    on(sensorsStoreEvents.sensorsLoaded, (event) => ({
+    on(sensorsStoreEvents.sensorsLoaded, event => ({
       isLoading: false,
       sensors: event.payload,
     })),

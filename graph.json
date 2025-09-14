@@ -22,18 +22,14 @@
             },
             "nx-release-publish": {
               "executor": "@nx/js:release-publish",
-              "dependsOn": [
-                "^nx-release-publish"
-              ],
+              "dependsOn": ["^nx-release-publish"],
               "options": {},
               "configurations": {},
               "parallelism": true
             },
             "build": {
               "executor": "@nx/angular:ng-packagr-lite",
-              "outputs": [
-                "{workspaceRoot}/dist/{projectRoot}"
-              ],
+              "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
               "options": {
                 "project": "libs/repositories/ng-package.json",
                 "tsConfig": "libs/repositories/tsconfig.lib.json"
@@ -47,36 +43,23 @@
               "defaultConfiguration": "production",
               "parallelism": true,
               "cache": true,
-              "dependsOn": [
-                "^build"
-              ],
-              "inputs": [
-                "production",
-                "^production"
-              ]
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
             },
             "test": {
               "executor": "@nx/vite:test",
-              "outputs": [
-                "{options.reportsDirectory}"
-              ],
+              "outputs": ["{options.reportsDirectory}"],
               "options": {
                 "reportsDirectory": "../../coverage/libs/repositories"
               },
               "configurations": {},
               "parallelism": true,
               "cache": true,
-              "inputs": [
-                "default",
-                "^production"
-              ]
+              "inputs": ["default", "^production"]
             }
           },
           "name": "repositories",
-          "tags": [
-            "npm:public",
-            "scope:repositories"
-          ],
+          "tags": ["npm:public", "scope:repositories"],
           "metadata": {
             "targetGroups": {},
             "js": {
@@ -112,18 +95,14 @@
             },
             "nx-release-publish": {
               "executor": "@nx/js:release-publish",
-              "dependsOn": [
-                "^nx-release-publish"
-              ],
+              "dependsOn": ["^nx-release-publish"],
               "options": {},
               "configurations": {},
               "parallelism": true
             },
             "build": {
               "executor": "@nx/angular:ng-packagr-lite",
-              "outputs": [
-                "{workspaceRoot}/dist/{projectRoot}"
-              ],
+              "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
               "options": {
                 "project": "libs/air-quality/ng-package.json",
                 "tsConfig": "libs/air-quality/tsconfig.lib.json"
@@ -137,35 +116,23 @@
               "defaultConfiguration": "production",
               "parallelism": true,
               "cache": true,
-              "dependsOn": [
-                "^build"
-              ],
-              "inputs": [
-                "production",
-                "^production"
-              ]
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
             },
             "test": {
               "executor": "@nx/vite:test",
-              "outputs": [
-                "{options.reportsDirectory}"
-              ],
+              "outputs": ["{options.reportsDirectory}"],
               "options": {
                 "reportsDirectory": "../../coverage/libs/air-quality"
               },
               "configurations": {},
               "parallelism": true,
               "cache": true,
-              "inputs": [
-                "default",
-                "^production"
-              ]
+              "inputs": ["default", "^production"]
             }
           },
           "name": "air-quality",
-          "tags": [
-            "npm:public"
-          ],
+          "tags": ["npm:public"],
           "metadata": {
             "targetGroups": {},
             "js": {
@@ -188,10 +155,7 @@
           "projectType": "application",
           "metadata": {
             "targetGroups": {
-              "E2E (CI)": [
-                "e2e-ci--src/e2e/app.cy.ts",
-                "e2e-ci"
-              ]
+              "E2E (CI)": ["e2e-ci--src/e2e/app.cy.ts", "e2e-ci"]
             }
           },
           "targets": {
@@ -208,9 +172,7 @@
                 "default",
                 "^production",
                 {
-                  "externalDependencies": [
-                    "cypress"
-                  ]
+                  "externalDependencies": ["cypress"]
                 }
               ],
               "outputs": [
@@ -218,25 +180,18 @@
                 "{workspaceRoot}/dist/cypress/apps/shell-e2e/screenshots"
               ],
               "metadata": {
-                "technologies": [
-                  "cypress"
-                ],
+                "technologies": ["cypress"],
                 "description": "Runs Cypress Tests",
                 "help": {
                   "command": "npx cypress run --help",
                   "example": {
-                    "args": [
-                      "--dev",
-                      "--headed"
-                    ]
+                    "args": ["--dev", "--headed"]
                   }
                 }
               },
               "dependsOn": [
                 {
-                  "projects": [
-                    "shell"
-                  ],
+                  "projects": ["shell"],
                   "target": "serve"
                 }
               ],
@@ -257,9 +212,7 @@
                 "default",
                 "^production",
                 {
-                  "externalDependencies": [
-                    "cypress"
-                  ]
+                  "externalDependencies": ["cypress"]
                 }
               ],
               "cache": true,
@@ -271,26 +224,19 @@
                 "command": "cypress run --env webServerCommand=\"npx nx run shell:serve-static\" --spec src/e2e/app.cy.ts --config=\"{\\\"baseUrl\\\":\\\"http://localhost:4200\\\",\\\"e2e\\\":{\\\"videosFolder\\\":\\\"..\\\\\\\\..\\\\\\\\dist\\\\\\\\cypress\\\\\\\\apps\\\\\\\\shell-e2e\\\\\\\\videos\\\\\\\\src-e2e-app-cy-ts\\\",\\\"screenshotsFolder\\\":\\\"..\\\\\\\\..\\\\\\\\dist\\\\\\\\cypress\\\\\\\\apps\\\\\\\\shell-e2e\\\\\\\\screenshots\\\\\\\\src-e2e-app-cy-ts\\\"}}\""
               },
               "metadata": {
-                "technologies": [
-                  "cypress"
-                ],
+                "technologies": ["cypress"],
                 "description": "Runs Cypress Tests in src/e2e/app.cy.ts in CI",
                 "help": {
                   "command": "npx cypress run --help",
                   "example": {
-                    "args": [
-                      "--dev",
-                      "--headed"
-                    ]
+                    "args": ["--dev", "--headed"]
                   }
                 }
               },
               "dependsOn": [
                 {
                   "target": "serve-static",
-                  "projects": [
-                    "shell"
-                  ]
+                  "projects": ["shell"]
                 }
               ],
               "executor": "nx:run-commands",
@@ -304,9 +250,7 @@
                 "default",
                 "^production",
                 {
-                  "externalDependencies": [
-                    "cypress"
-                  ]
+                  "externalDependencies": ["cypress"]
                 }
               ],
               "outputs": [
@@ -321,18 +265,13 @@
                 }
               ],
               "metadata": {
-                "technologies": [
-                  "cypress"
-                ],
+                "technologies": ["cypress"],
                 "description": "Runs Cypress Tests in CI",
                 "nonAtomizedTarget": "e2e",
                 "help": {
                   "command": "npx cypress run --help",
                   "example": {
-                    "args": [
-                      "--dev",
-                      "--headed"
-                    ]
+                    "args": ["--dev", "--headed"]
                   }
                 }
               },
@@ -349,17 +288,12 @@
                 "command": "cypress open"
               },
               "metadata": {
-                "technologies": [
-                  "cypress"
-                ],
+                "technologies": ["cypress"],
                 "description": "Opens Cypress",
                 "help": {
                   "command": "npx cypress open --help",
                   "example": {
-                    "args": [
-                      "--dev",
-                      "--e2e"
-                    ]
+                    "args": ["--dev", "--e2e"]
                   }
                 }
               },
@@ -380,18 +314,12 @@
                 "{workspaceRoot}/apps/shell-e2e/eslint.config.mjs",
                 "{workspaceRoot}/tools/eslint-rules/**/*",
                 {
-                  "externalDependencies": [
-                    "eslint"
-                  ]
+                  "externalDependencies": ["eslint"]
                 }
               ],
-              "outputs": [
-                "{options.outputFile}"
-              ],
+              "outputs": ["{options.outputFile}"],
               "metadata": {
-                "technologies": [
-                  "eslint"
-                ],
+                "technologies": ["eslint"],
                 "description": "Runs ESLint on project",
                 "help": {
                   "command": "npx eslint --help",
@@ -411,9 +339,7 @@
           "$schema": "../../node_modules/nx/schemas/project-schema.json",
           "sourceRoot": "apps/shell-e2e/src",
           "tags": [],
-          "implicitDependencies": [
-            "shell"
-          ]
+          "implicitDependencies": ["shell"]
         }
       },
       "open-api": {
@@ -437,18 +363,14 @@
             },
             "nx-release-publish": {
               "executor": "@nx/js:release-publish",
-              "dependsOn": [
-                "^nx-release-publish"
-              ],
+              "dependsOn": ["^nx-release-publish"],
               "options": {},
               "configurations": {},
               "parallelism": true
             },
             "build": {
               "executor": "@nx/angular:ng-packagr-lite",
-              "outputs": [
-                "{workspaceRoot}/dist/{projectRoot}"
-              ],
+              "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
               "options": {
                 "project": "libs/open-api/ng-package.json",
                 "tsConfig": "libs/open-api/tsconfig.lib.json"
@@ -462,35 +384,23 @@
               "defaultConfiguration": "production",
               "parallelism": true,
               "cache": true,
-              "dependsOn": [
-                "^build"
-              ],
-              "inputs": [
-                "production",
-                "^production"
-              ]
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
             },
             "test": {
               "executor": "@nx/vite:test",
-              "outputs": [
-                "{options.reportsDirectory}"
-              ],
+              "outputs": ["{options.reportsDirectory}"],
               "options": {
                 "reportsDirectory": "../../coverage/libs/open-api"
               },
               "configurations": {},
               "parallelism": true,
               "cache": true,
-              "inputs": [
-                "default",
-                "^production"
-              ]
+              "inputs": ["default", "^production"]
             }
           },
           "name": "open-api",
-          "tags": [
-            "npm:public"
-          ],
+          "tags": ["npm:public"],
           "metadata": {
             "targetGroups": {},
             "js": {
@@ -526,18 +436,14 @@
             },
             "nx-release-publish": {
               "executor": "@nx/js:release-publish",
-              "dependsOn": [
-                "^nx-release-publish"
-              ],
+              "dependsOn": ["^nx-release-publish"],
               "options": {},
               "configurations": {},
               "parallelism": true
             },
             "build": {
               "executor": "@nx/angular:ng-packagr-lite",
-              "outputs": [
-                "{workspaceRoot}/dist/{projectRoot}"
-              ],
+              "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
               "options": {
                 "project": "libs/shared/ng-package.json",
                 "tsConfig": "libs/shared/tsconfig.lib.json"
@@ -551,36 +457,23 @@
               "defaultConfiguration": "production",
               "parallelism": true,
               "cache": true,
-              "dependsOn": [
-                "^build"
-              ],
-              "inputs": [
-                "production",
-                "^production"
-              ]
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
             },
             "test": {
               "executor": "@nx/vite:test",
-              "outputs": [
-                "{options.reportsDirectory}"
-              ],
+              "outputs": ["{options.reportsDirectory}"],
               "options": {
                 "reportsDirectory": "../../coverage/libs/shared"
               },
               "configurations": {},
               "parallelism": true,
               "cache": true,
-              "inputs": [
-                "default",
-                "^production"
-              ]
+              "inputs": ["default", "^production"]
             }
           },
           "name": "shared",
-          "tags": [
-            "npm:public",
-            "scope:shared"
-          ],
+          "tags": ["npm:public", "scope:shared"],
           "metadata": {
             "targetGroups": {},
             "js": {
@@ -616,15 +509,11 @@
             },
             "build": {
               "executor": "@angular/build:application",
-              "outputs": [
-                "{options.outputPath}"
-              ],
+              "outputs": ["{options.outputPath}"],
               "options": {
                 "outputPath": "dist/apps/shell",
                 "browser": "apps/shell/src/main.ts",
-                "polyfills": [
-                  "zone.js"
-                ],
+                "polyfills": ["zone.js"],
                 "tsConfig": "apps/shell/tsconfig.app.json",
                 "assets": [
                   {
@@ -635,9 +524,7 @@
                 "define": {
                   "MY_API_URL": "\"https://api.ignaciokoestner.de\""
                 },
-                "styles": [
-                  "apps/shell/src/styles.css"
-                ]
+                "styles": ["apps/shell/src/styles.css"]
               },
               "configurations": {
                 "production": {
@@ -664,13 +551,8 @@
               "defaultConfiguration": "production",
               "parallelism": true,
               "cache": true,
-              "dependsOn": [
-                "^build"
-              ],
-              "inputs": [
-                "production",
-                "^production"
-              ]
+              "dependsOn": ["^build"],
+              "inputs": ["production", "^production"]
             },
             "serve": {
               "continuous": true,
@@ -697,19 +579,14 @@
             },
             "test": {
               "executor": "@nx/vite:test",
-              "outputs": [
-                "{options.reportsDirectory}"
-              ],
+              "outputs": ["{options.reportsDirectory}"],
               "options": {
                 "reportsDirectory": "../../coverage/apps/shell"
               },
               "configurations": {},
               "parallelism": true,
               "cache": true,
-              "inputs": [
-                "default",
-                "^production"
-              ]
+              "inputs": ["default", "^production"]
             },
             "serve-static": {
               "continuous": true,
@@ -729,9 +606,7 @@
           "projectType": "application",
           "prefix": "app",
           "sourceRoot": "apps/shell/src",
-          "tags": [
-            "scope:shell"
-          ],
+          "tags": ["scope:shell"],
           "implicitDependencies": []
         }
       },
@@ -742,30 +617,19 @@
           "root": ".",
           "metadata": {
             "targetGroups": {
-              "Docker": [
-                "docker:build",
-                "docker:run",
-                "nx-release-publish"
-              ]
+              "Docker": ["docker:build", "docker:run", "nx-release-publish"]
             }
           },
           "targets": {
             "docker:build": {
               "options": {
                 "cwd": ".",
-                "args": [
-                  "--tag ."
-                ],
+                "args": ["--tag ."],
                 "command": "docker build ."
               },
-              "inputs": [
-                "production",
-                "^production"
-              ],
+              "inputs": ["production", "^production"],
               "metadata": {
-                "technologies": [
-                  "docker"
-                ],
+                "technologies": ["docker"],
                 "description": "Run Docker build",
                 "help": {
                   "command": "docker build --help",
@@ -782,30 +646,20 @@
               "parallelism": true
             },
             "docker:run": {
-              "dependsOn": [
-                "docker:build"
-              ],
+              "dependsOn": ["docker:build"],
               "options": {
                 "cwd": ".",
                 "command": "docker run {args} ."
               },
-              "inputs": [
-                "production",
-                "^production"
-              ],
+              "inputs": ["production", "^production"],
               "metadata": {
-                "technologies": [
-                  "docker"
-                ],
+                "technologies": ["docker"],
                 "description": "Run Docker run",
                 "help": {
                   "command": "docker run --help",
                   "example": {
                     "options": {
-                      "args": [
-                        "-p",
-                        "3000:3000"
-                      ]
+                      "args": ["-p", "3000:3000"]
                     }
                   }
                 }

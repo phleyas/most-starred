@@ -20,20 +20,7 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard',
-      },
-      {
-        path: 'dashboard',
-        loadComponent: () => import('@frontend/air-quality').then(m => m.Dashboard),
-      },
-      {
-        path: 'sensors',
-        loadComponent: () => import('@frontend/air-quality').then(m => m.SensorsTable),
-      },
-      {
-        path: 'locations',
-        loadComponent: () => import('@frontend/air-quality').then(m => m.LocationsTable),
+        loadChildren: () => import('@frontend/air-quality').then(m => m.airQualityRoutes),
       },
     ],
   },

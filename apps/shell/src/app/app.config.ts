@@ -10,6 +10,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
-    provideApi({ basePath: MY_API_URL }),
+    provideApi({ basePath: API_BASE_URL }),
   ],
 };

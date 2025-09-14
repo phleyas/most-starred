@@ -7,6 +7,9 @@ import { locationsStoreEvents } from './locations-store.events';
 import { locationsTableEvents } from '../ui/locations-table/locations-table.events';
 import { locationsDropdownEvents } from '../ui/locations-dropdown/locations-dropdown.events';
 import { LocationsDataService } from './locations-data.service';
+import { environment } from './../environments/environment';
+
+export const withTreeShakableDevTools = environment.storeWithDevTools;
 
 type LocationsState = {
   city: string;
@@ -27,6 +30,7 @@ const initialState: LocationsState = {
 export const LocationsStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
+  withTreeShakableDevTools('Locations Store'),
   withEffects((store, events = inject(Events), locationDataService = inject(LocationsDataService)) => ({
     onLocationsSelected$: events.on(locationsStoreEvents.locationsLoaded).pipe(
       filter(locationsLoaded => locationsLoaded.payload.length > 0),

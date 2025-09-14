@@ -7,10 +7,12 @@
     "build": "npx nx run-many --target=build --all --prod",
     "test": "npx nx run-many --target=test --all",
     "lint": "npx nx run-many --target=lint --all --exclude=open-api --verbose",
-    "prettier": "npx prettier . --write"
+    "prettier": "npx prettier . --write",
+    "openapi:generator": "npx openapi-generator-cli generate && npm run prettier"
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/ngrx-toolkit": "^20.4.0",
     "@angular/cdk": "20.2.3",
     "@angular/common": "20.3.0",
     "@angular/compiler": "20.3.0",
