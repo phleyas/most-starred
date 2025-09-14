@@ -9,8 +9,7 @@ import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { LocationsDropdown } from '../locations-dropdown/locations-dropdown';
-import { SensorsStore } from '../../data/sensors-store';
-import { LocationsStore } from '../../data/locations-store';
+import { SensorsTableStore } from './sensors-table-store';
 
 @Component({
   selector: 'sensors-table',
@@ -26,20 +25,37 @@ import { LocationsStore } from '../../data/locations-store';
   ],
   templateUrl: './sensors-table.html',
   styleUrl: './sensors-table.css',
+  providers: [SensorsTableStore],
 })
 export class SensorsTable {
-  public readonly sensorsStore = inject(SensorsStore);
-  public readonly locationsStore = inject(LocationsStore);
+  public readonly sensorsTableStore = inject(SensorsTableStore);
 
-  public readonly isLoading = computed(() => this.locationsStore.isLoading() || this.sensorsStore.isLoading());
-  public readonly city = computed(() => this.locationsStore.city());
-  public readonly country = computed(() => this.locationsStore.country());
-  public readonly selectedLocationId = computed(() => this.locationsStore.selectedLocationId());
-  public readonly locations = computed(() => this.locationsStore.locations());
+  public readonly isLoading = computed(() => this.sensorsTableStore.isLoading());
 
-  public readonly sensors = computed(() => this.sensorsStore.sensors());
+  public readonly city = computed(() => this.sensorsTableStore.city());
+  public readonly country = computed(() => this.sensorsTableStore.country());
+  public readonly selectedLocationId = computed(() => this.sensorsTableStore.selectedLocationId());
+
+  public readonly locations = computed(() => this.sensorsTableStore.locations());
+  public readonly sensors = computed(() => this.sensorsTableStore.sensors());
 
   onSensorClicked(sensor: SensorDTO) {
     console.log('Sensor clicked:', sensor);
+  }
+
+  async onReloadLocations() {
+    await this.sensorsTableStore.loadLocations();
+  }
+
+  async onSelectedLocationIdChanged($event: number) {
+    this.sensorsTableStore.setSelectedLocationId($event);
+  }
+
+  onCountryChanged($event: string) {
+    this.sensorsTableStore.setCountry($event);
+  }
+
+  onCityChanged($event: string) {
+    this.sensorsTableStore.setCity($event);
   }
 }

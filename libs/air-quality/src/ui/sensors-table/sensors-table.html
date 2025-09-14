@@ -3,7 +3,12 @@
   [city]="city()"
   [locations]="locations()"
   [selectedLocationId]="selectedLocationId()"
-  [disabled]="isLoading()" />
+  [disabled]="isLoading()"
+  (cityChanged)="onCityChanged($event)"
+  (countryChanged)="onCountryChanged($event)"
+  (selectedLocationIdChanged)="onSelectedLocationIdChanged($event)"
+  (reloadLocations)="onReloadLocations()"
+  />
 
 <shared-table [data]="sensors()">
   <ng-container *sharedTableHeader>

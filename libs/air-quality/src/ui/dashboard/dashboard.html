@@ -3,7 +3,11 @@
   [city]="city()"
   [country]="country()"
   [locations]="locations()"
-  [selectedLocationId]="selectedLocationId()" />
+  [selectedLocationId]="selectedLocationId()"
+  (cityChanged)="onCityChanged($event)"
+  (countryChanged)="onCountryChanged($event)"
+  (selectedLocationIdChanged)="onSelectedLocationIdChanged($event)"
+  (reloadLocations)="onReloadLocations()" />
 
 <div class="flex flex-col md:flex-row gap-4 pb-5">
   @if(sensors().length > 0 && chartOptions()) {

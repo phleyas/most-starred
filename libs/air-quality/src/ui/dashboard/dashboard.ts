@@ -4,25 +4,26 @@ import { ApexOptions } from 'apexcharts';
 import { FormsModule } from '@angular/forms';
 import { SensorsCard } from '../sensors-card/sensors-card';
 import { LocationsDropdown } from '../locations-dropdown/locations-dropdown';
-import { SensorsStore } from '../../data/sensors-store';
-import { LocationsStore } from '../../data/locations-store';
+import { DashboardStore } from './dashboard-store';
 
 @Component({
   selector: 'dashboard',
   imports: [FormsModule, Chart, SensorsCard, LocationsDropdown, LoadingSpinner],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
+  providers: [DashboardStore],
 })
 export class Dashboard {
-  public readonly sensorsStore = inject(SensorsStore);
-  public readonly locationsStore = inject(LocationsStore);
+  public readonly dashboardStore = inject(DashboardStore);
 
-  public readonly isLoading = computed(() => this.locationsStore.isLoading() || this.sensorsStore.isLoading());
-  public readonly city = computed(() => this.locationsStore.city());
-  public readonly country = computed(() => this.locationsStore.country());
-  public readonly selectedLocationId = computed(() => this.locationsStore.selectedLocationId());
-  public readonly locations = computed(() => this.locationsStore.locations());
-  public readonly sensors = computed(() => this.sensorsStore.sensors());
+  public readonly isLoading = computed(() => this.dashboardStore.isLoading());
+
+  public readonly city = computed(() => this.dashboardStore.city());
+  public readonly country = computed(() => this.dashboardStore.country());
+  public readonly selectedLocationId = computed(() => this.dashboardStore.selectedLocationId());
+
+  public readonly locations = computed(() => this.dashboardStore.locations());
+  public readonly sensors = computed(() => this.dashboardStore.sensors());
 
   public readonly chartOptions = computed<ApexOptions>(() => {
     const sensors = this.sensors();
@@ -55,4 +56,20 @@ export class Dashboard {
 
     return builder.build();
   });
+
+  async onReloadLocations() {
+    await this.dashboardStore.loadLocations();
+  }
+
+  async onSelectedLocationIdChanged($event: number) {
+    this.dashboardStore.setSelectedLocationId($event);
+  }
+
+  onCountryChanged($event: string) {
+    this.dashboardStore.setCountry($event);
+  }
+
+  onCityChanged($event: string) {
+    this.dashboardStore.setCity($event);
+  }
 }

@@ -1,5 +1,4 @@
-import { locationsDropdownEvents } from './locations-dropdown.events';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Dropdown, Input } from '@frontend/shared';
 import { Dispatcher } from '@ngrx/signals/events';
@@ -24,6 +23,10 @@ export class LocationsDropdown {
   public readonly locations = input.required<LocationDTO[]>();
   public readonly disabled = input.required<boolean>();
   public readonly selectedLocationId = input.required<number | undefined>();
+  public readonly cityChanged = output<string>();
+  public readonly countryChanged = output<string>();
+  public readonly selectedLocationIdChanged = output<number>();
+  public readonly reloadLocations = output<void>();
 
   public readonly pattern = '^[A-Za-zÄÖÜäöüß ]+$';
 
@@ -32,15 +35,17 @@ export class LocationsDropdown {
   );
 
   public readonly dropdownItems = computed(() =>
-    this.locations().map(loc => {
-      const parts = [loc.name, loc.locality, loc.country?.name].filter(Boolean);
-      const sensorsCount = Array.isArray(loc.sensors) ? loc.sensors.length : 0;
+    this.locations()
+      .filter(loc => loc.id)
+      .map(loc => {
+        const parts = [loc.name, loc.locality, loc.country?.name].filter(Boolean);
+        const sensorsCount = Array.isArray(loc.sensors) ? loc.sensors.length : 0;
 
-      return {
-        label: `${parts.join(', ')} [${sensorsCount}]`,
-        id: loc.id,
-      } satisfies DropdownPayload;
-    })
+        return {
+          label: `${parts.join(', ')} [${sensorsCount}]`,
+          id: loc.id!,
+        } satisfies DropdownPayload;
+      })
   );
 
   public readonly dropDownLabel = computed(() => {
@@ -54,22 +59,4 @@ export class LocationsDropdown {
   });
 
   dropDownLabelFn = (item: DropdownPayload) => item.label;
-
-  onDropdownClicked($event: DropdownPayload) {
-    if ($event.id) {
-      this.dispatcher.dispatch(locationsDropdownEvents.locationSelected($event.id));
-    }
-  }
-
-  reloadLocations() {
-    this.dispatcher.dispatch(locationsDropdownEvents.loadLocations());
-  }
-
-  cityChanged($event: string) {
-    this.dispatcher.dispatch(locationsDropdownEvents.citySelected($event));
-  }
-
-  countryChanged($event: string) {
-    this.dispatcher.dispatch(locationsDropdownEvents.countrySelected($event));
-  }
 }

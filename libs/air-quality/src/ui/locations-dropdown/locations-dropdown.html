@@ -1,19 +1,19 @@
 <div class="flex flex-col md:flex-row gap-4 pb-2">
   <shared-input
     [ngModel]="country()"
-    (ngModelChange)="countryChanged($event)"
+    (ngModelChange)="countryChanged.emit($event)"
     placeholder="Country"
     [pattern]="pattern" />
   <shared-input
     [ngModel]="city()"
-    (ngModelChange)="cityChanged($event)"
+    (ngModelChange)="cityChanged.emit($event)"
     placeholder="City"
-    (focusOut)="reloadLocations()"
-    (enterPressed)="reloadLocations()"
+    (focusOut)="reloadLocations.emit()"
+    (enterPressed)="reloadLocations.emit()"
     [pattern]="pattern" />
   <shared-dropdown
     [labelFn]="dropDownLabelFn"
-    (clicked)="onDropdownClicked($event)"
+    (clicked)="selectedLocationIdChanged.emit($event.id)"
     [disabled]="isDisabled()"
     [label]="dropDownLabel()"
     [payload]="dropdownItems()" />
