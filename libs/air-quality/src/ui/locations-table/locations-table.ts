@@ -8,7 +8,9 @@ import {
 } from '@frontend/shared';
 import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LocationsTableStore } from './locations-table-store';
+import { Store } from '@ngrx/store';
+import { locationsFeature } from '../../state/locations.reducer';
+import { LocationsActions } from '../../state/locations.actions';
 
 @Component({
   selector: 'locations-table',
@@ -23,31 +25,25 @@ import { LocationsTableStore } from './locations-table-store';
   ],
   templateUrl: './locations-table.html',
   styleUrl: './locations-table.css',
-  providers: [LocationsTableStore],
 })
 export class LocationsTable {
   public readonly pattern = '^[A-Za-zÄÖÜäöüß ]+$';
-  private readonly locationsTableStore = inject(LocationsTableStore);
-  public readonly disabled = computed(
-    () =>
-      this.locationsTableStore.isLoading() ||
-      !this.locationsTableStore.city().trim() ||
-      !this.locationsTableStore.country().trim()
-  );
-  public readonly isLoading = computed(() => this.locationsTableStore.isLoading());
-  public readonly city = computed(() => this.locationsTableStore.city());
-  public readonly country = computed(() => this.locationsTableStore.country());
-  public readonly locations = computed(() => this.locationsTableStore.locations());
+  private readonly store = inject(Store);
+  public readonly isLoading = this.store.selectSignal(locationsFeature.selectLoading);
+  public readonly city = this.store.selectSignal(locationsFeature.selectCity);
+  public readonly country = this.store.selectSignal(locationsFeature.selectCountry);
+  public readonly locations = this.store.selectSignal(locationsFeature.selectLocations);
+  public readonly disabled = computed(() => this.isLoading() || !this.city().trim() || !this.country().trim());
 
   onSearchClicked() {
-    this.locationsTableStore.loadLocations();
+    this.store.dispatch(LocationsActions.loadLocations());
   }
 
   cityChanged($event: string) {
-    this.locationsTableStore.setCity($event);
+    this.store.dispatch(LocationsActions.setCity({ city: $event }));
   }
 
   countryChanged($event: string) {
-    this.locationsTableStore.setCountry($event);
+    this.store.dispatch(LocationsActions.setCountry({ country: $event }));
   }
 }

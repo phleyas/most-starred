@@ -4,26 +4,29 @@ import { ApexOptions } from 'apexcharts';
 import { FormsModule } from '@angular/forms';
 import { SensorsCard } from '../sensors-card/sensors-card';
 import { LocationsDropdown } from '../locations-dropdown/locations-dropdown';
-import { DashboardStore } from './dashboard-store';
+import { Store } from '@ngrx/store';
+import { locationsFeature } from '../../state/locations.reducer';
+import { sensorsFeature } from '../../state/sensors.reducer';
+import { LocationsActions } from '../../state/locations.actions';
 
 @Component({
   selector: 'dashboard',
   imports: [FormsModule, Chart, SensorsCard, LocationsDropdown, LoadingSpinner],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
-  providers: [DashboardStore],
 })
 export class Dashboard {
-  public readonly dashboardStore = inject(DashboardStore);
+  private readonly store = inject(Store);
+  public readonly isLoadingLocations = this.store.selectSignal(locationsFeature.selectLoading);
+  public readonly isLoadingSensors = this.store.selectSignal(sensorsFeature.selectLoading);
+  public readonly isLoading = computed(() => this.isLoadingLocations() || this.isLoadingSensors());
 
-  public readonly isLoading = computed(() => this.dashboardStore.isLoading());
+  public readonly city = this.store.selectSignal(locationsFeature.selectCity);
+  public readonly country = this.store.selectSignal(locationsFeature.selectCountry);
+  public readonly selectedLocationId = this.store.selectSignal(locationsFeature.selectChosenLocationId);
 
-  public readonly city = computed(() => this.dashboardStore.city());
-  public readonly country = computed(() => this.dashboardStore.country());
-  public readonly selectedLocationId = computed(() => this.dashboardStore.selectedLocationId());
-
-  public readonly locations = computed(() => this.dashboardStore.locations());
-  public readonly sensors = computed(() => this.dashboardStore.sensors());
+  public readonly locations = this.store.selectSignal(locationsFeature.selectLocations);
+  public readonly sensors = this.store.selectSignal(sensorsFeature.selectSensors);
 
   public readonly chartOptions = computed<ApexOptions>(() => {
     const sensors = this.sensors();
@@ -57,19 +60,19 @@ export class Dashboard {
     return builder.build();
   });
 
-  async onReloadLocations() {
-    await this.dashboardStore.loadLocations();
+  onReloadLocations() {
+    this.store.dispatch(LocationsActions.loadLocations());
   }
 
-  async onSelectedLocationIdChanged($event: number) {
-    this.dashboardStore.setSelectedLocationId($event);
+  onSelectedLocationIdChanged($event: number) {
+    this.store.dispatch(LocationsActions.locationChosen({ locationId: $event }));
   }
 
   onCountryChanged($event: string) {
-    this.dashboardStore.setCountry($event);
+    this.store.dispatch(LocationsActions.setCountry({ country: $event }));
   }
 
   onCityChanged($event: string) {
-    this.dashboardStore.setCity($event);
+    this.store.dispatch(LocationsActions.setCity({ city: $event }));
   }
 }

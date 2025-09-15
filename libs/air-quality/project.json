@@ -15,12 +15,6 @@
       },
       "configurations": {
         "production": {
-          "fileReplacements": [
-            {
-              "replace": "libs/air-quality/src/environments/environment.ts",
-              "with": "libs/air-quality/src/environments/environment.prod.ts"
-            }
-          ],
           "tsConfig": "libs/air-quality/tsconfig.lib.prod.json"
         },
         "development": {}
