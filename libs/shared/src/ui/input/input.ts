@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output, signal } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -25,6 +25,7 @@ import {
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Input implements ControlValueAccessor, Validator {
   value = signal('');

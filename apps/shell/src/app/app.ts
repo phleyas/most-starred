@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { NavBar } from '../ui/navbar/navbar';
 import { initDropdowns, initFlowbite } from 'flowbite';
@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App implements OnInit, AfterViewInit {
   meta = inject(Meta);

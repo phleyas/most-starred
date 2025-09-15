@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, input, output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, input, output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Dropdown as FlowbiteDropdown } from 'flowbite';
 
@@ -7,6 +7,7 @@ import { Dropdown as FlowbiteDropdown } from 'flowbite';
   imports: [CommonModule],
   templateUrl: './dropdown.html',
   styleUrl: './dropdown.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dropdown<T = unknown> implements AfterViewInit {
   @ViewChild('dropdownMenu') menu!: ElementRef<HTMLElement>;

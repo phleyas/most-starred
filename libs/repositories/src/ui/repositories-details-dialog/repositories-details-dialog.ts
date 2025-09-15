@@ -1,5 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { GithubRepository } from '../../data/github-api-response';
 import { NgOptimizedImage } from '@angular/common';
 import { AvatarPlaceholder } from '@frontend/shared';
@@ -8,6 +8,7 @@ import { AvatarPlaceholder } from '@frontend/shared';
   selector: 'repositories-details-dialog',
   imports: [NgOptimizedImage, AvatarPlaceholder],
   templateUrl: './repositories-details-dialog.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RepositoriesDetailsDialog {
   dialogRef = inject<DialogRef>(DialogRef);

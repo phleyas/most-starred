@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { debounceTime, Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GithubRepository } from '../../data/github-api-response';
@@ -29,6 +29,7 @@ import { RepositoriesStore } from './repositories-store';
   ],
   templateUrl: './repositories-table.html',
   providers: [RepositoriesStore],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RepositoriesTable implements OnInit {
   readonly store = inject(RepositoriesStore);

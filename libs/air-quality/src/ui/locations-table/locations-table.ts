@@ -6,7 +6,7 @@ import {
   Button,
   LoadingSpinner,
 } from '@frontend/shared';
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { locationsFeature } from '../../state/locations.reducer';
@@ -25,6 +25,7 @@ import { LocationsActions } from '../../state/locations.actions';
   ],
   templateUrl: './locations-table.html',
   styleUrl: './locations-table.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocationsTable {
   public readonly pattern = '^[A-Za-zÄÖÜäöüß ]+$';

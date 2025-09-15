@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef } from '@angular/core';
 import { TableRowTemplateDirective } from '../../directives/table-row-template.directive';
 import { TableHeaderTemplateDirective } from '../../directives/table-header-template.directive';
 
@@ -7,6 +7,7 @@ import { TableHeaderTemplateDirective } from '../../directives/table-header-temp
   selector: 'shared-table',
   templateUrl: './table.html',
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent<TItem extends object> {
   @Input() data!: TItem[];

@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { SensorDTO } from '@frontend/open-api';
 
 @Component({
@@ -7,6 +7,7 @@ import { SensorDTO } from '@frontend/open-api';
   imports: [DecimalPipe],
   templateUrl: './sensors-card.html',
   styleUrl: './sensors-card.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SensorsCard {
   public readonly sensors = input<SensorDTO[]>([]);

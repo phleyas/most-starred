@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Dropdown, Input } from '@frontend/shared';
 import { Dispatcher } from '@ngrx/signals/events';
@@ -14,6 +14,7 @@ type DropdownPayload = {
   imports: [Input, FormsModule, Dropdown],
   templateUrl: './locations-dropdown.html',
   styleUrl: './locations-dropdown.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocationsDropdown {
   public readonly dispatcher = inject(Dispatcher);

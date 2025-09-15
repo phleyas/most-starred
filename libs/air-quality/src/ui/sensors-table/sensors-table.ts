@@ -5,7 +5,7 @@ import {
   LoadingSpinner,
 } from '@frontend/shared';
 import { SensorDTO } from '@frontend/open-api';
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { LocationsDropdown } from '../locations-dropdown/locations-dropdown';
@@ -28,6 +28,7 @@ import { LocationsActions } from '../../state/locations.actions';
   ],
   templateUrl: './sensors-table.html',
   styleUrl: './sensors-table.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SensorsTable {
   private readonly store = inject(Store);

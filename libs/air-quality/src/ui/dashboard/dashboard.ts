@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Chart, ChartBuilder, LoadingSpinner } from '@frontend/shared';
 import { ApexOptions } from 'apexcharts';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,7 @@ import { LocationsActions } from '../../state/locations.actions';
   imports: [FormsModule, Chart, SensorsCard, LocationsDropdown, LoadingSpinner],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dashboard {
   private readonly store = inject(Store);

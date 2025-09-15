@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, effect, viewChild } from '@angular/core';
+import { Component, ElementRef, input, effect, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import ApexCharts, { ApexOptions } from 'apexcharts';
 
 @Component({
@@ -6,6 +6,7 @@ import ApexCharts, { ApexOptions } from 'apexcharts';
   imports: [],
   templateUrl: './chart.html',
   styleUrl: './chart.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Chart {
   chart = viewChild<ElementRef<HTMLDivElement>>('chartView');
