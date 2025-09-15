@@ -4,6 +4,8 @@ import { catchError, exhaustMap, filter, map, of } from 'rxjs';
 import { LocationsActions } from './locations.actions';
 import { inject, Injectable } from '@angular/core';
 import { SensorsActions } from './sensors.actions';
+import { DashboardActions } from '../ui/dashboard/dashboard.actions';
+import { SensorsTableActions } from '../ui/sensors-table/sensors-table.actions';
 
 @Injectable()
 export class SensorsEffects {
@@ -12,7 +14,7 @@ export class SensorsEffects {
 
   loadSensors$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(LocationsActions.locationChosen),
+      ofType(LocationsActions.locationChosen, DashboardActions.locationChosen, SensorsTableActions.locationChosen),
       filter(({ locationId }) => locationId !== undefined),
       exhaustMap(({ locationId }) =>
         this.sensorsDataService.getSensors(locationId!).pipe(

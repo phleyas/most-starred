@@ -12,7 +12,7 @@ import { LocationsDropdown } from '../locations-dropdown/locations-dropdown';
 import { Store } from '@ngrx/store';
 import { locationsFeature } from '../../state/locations.reducer';
 import { sensorsFeature } from '../../state/sensors.reducer';
-import { LocationsActions } from '../../state/locations.actions';
+import { SensorsTableActions } from './sensors-table.actions';
 
 @Component({
   selector: 'sensors-table',
@@ -48,18 +48,18 @@ export class SensorsTable {
   }
 
   onReloadLocations() {
-    this.store.dispatch(LocationsActions.loadLocations());
+    this.store.dispatch(SensorsTableActions.loadLocations());
   }
 
   onSelectedLocationIdChanged($event: number) {
-    this.store.dispatch(LocationsActions.locationChosen({ locationId: $event }));
+    this.store.dispatch(SensorsTableActions.locationChosen({ locationId: $event }));
   }
 
   onCountryChanged($event: string) {
-    this.store.dispatch(LocationsActions.setCountry({ country: $event }));
+    this.store.dispatch(SensorsTableActions.setCountry({ country: $event }));
   }
 
   onCityChanged($event: string) {
-    this.store.dispatch(LocationsActions.setCity({ city: $event }));
+    this.store.dispatch(SensorsTableActions.setCity({ city: $event }));
   }
 }

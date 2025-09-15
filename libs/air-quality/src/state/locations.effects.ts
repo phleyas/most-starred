@@ -6,6 +6,9 @@ import { LocationsDataService } from '../data/locations-data.service';
 import { Store } from '@ngrx/store';
 import { concatLatestFrom } from '@ngrx/operators';
 import { locationsFeature } from './locations.reducer';
+import { DashboardActions } from '../ui/dashboard/dashboard.actions';
+import { LocationsTableActions } from '../ui/locations-table/locations-table.actions';
+import { SensorsTableActions } from '../ui/sensors-table/sensors-table.actions';
 
 @Injectable()
 export class LocationsEffects {
@@ -15,7 +18,12 @@ export class LocationsEffects {
 
   loadLocations$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(LocationsActions.loadLocations),
+      ofType(
+        LocationsActions.loadLocations,
+        DashboardActions.loadLocations,
+        SensorsTableActions.loadLocations,
+        LocationsTableActions.loadLocations
+      ),
       concatLatestFrom(() => this.store.select(locationsFeature.selectCityCountry)),
       exhaustMap(([, { city, country }]) =>
         this.locationsDataService.getLocations(city, country).pipe(

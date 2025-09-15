@@ -7,7 +7,7 @@ import { LocationsDropdown } from '../locations-dropdown/locations-dropdown';
 import { Store } from '@ngrx/store';
 import { locationsFeature } from '../../state/locations.reducer';
 import { sensorsFeature } from '../../state/sensors.reducer';
-import { LocationsActions } from '../../state/locations.actions';
+import { DashboardActions } from './dashboard.actions';
 
 @Component({
   selector: 'dashboard',
@@ -62,18 +62,18 @@ export class Dashboard {
   });
 
   onReloadLocations() {
-    this.store.dispatch(LocationsActions.loadLocations());
+    this.store.dispatch(DashboardActions.loadLocations());
   }
 
   onSelectedLocationIdChanged($event: number) {
-    this.store.dispatch(LocationsActions.locationChosen({ locationId: $event }));
+    this.store.dispatch(DashboardActions.locationChosen({ locationId: $event }));
   }
 
   onCountryChanged($event: string) {
-    this.store.dispatch(LocationsActions.setCountry({ country: $event }));
+    this.store.dispatch(DashboardActions.setCountry({ country: $event }));
   }
 
   onCityChanged($event: string) {
-    this.store.dispatch(LocationsActions.setCity({ city: $event }));
+    this.store.dispatch(DashboardActions.setCity({ city: $event }));
   }
 }

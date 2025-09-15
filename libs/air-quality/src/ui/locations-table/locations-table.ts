@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { locationsFeature } from '../../state/locations.reducer';
-import { LocationsActions } from '../../state/locations.actions';
+import { LocationsTableActions } from './locations-table.actions';
 
 @Component({
   selector: 'locations-table',
@@ -37,14 +37,14 @@ export class LocationsTable {
   public readonly disabled = computed(() => this.isLoading() || !this.city().trim() || !this.country().trim());
 
   onSearchClicked() {
-    this.store.dispatch(LocationsActions.loadLocations());
+    this.store.dispatch(LocationsTableActions.loadLocations());
   }
 
   cityChanged($event: string) {
-    this.store.dispatch(LocationsActions.setCity({ city: $event }));
+    this.store.dispatch(LocationsTableActions.setCity({ city: $event }));
   }
 
   countryChanged($event: string) {
-    this.store.dispatch(LocationsActions.setCountry({ country: $event }));
+    this.store.dispatch(LocationsTableActions.setCountry({ country: $event }));
   }
 }
