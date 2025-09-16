@@ -77,7 +77,8 @@
       "unitTestRunner": "vitest"
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "css",
+      "changeDetection": "OnPush"
     }
   }
 }
