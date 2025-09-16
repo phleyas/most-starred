@@ -33,10 +33,18 @@ export const sensorsReducer = createReducer(
     loading: false,
     sensors: [],
   })),
-  on(DashboardActions.setCountry, SensorsTableActions.setCountry, LocationsTableActions.setCountry, state => ({
-    ...state,
-    sensors: [],
-  }))
+  on(
+    DashboardActions.setCountry,
+    SensorsTableActions.setCountry,
+    LocationsTableActions.setCountry,
+    DashboardActions.setCity,
+    SensorsTableActions.setCity,
+    LocationsTableActions.setCity,
+    state => ({
+      ...state,
+      sensors: [],
+    })
+  )
 );
 
 export const sensorsFeature = createFeature({
