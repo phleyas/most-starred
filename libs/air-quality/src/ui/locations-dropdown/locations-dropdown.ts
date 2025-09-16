@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Dropdown, Input } from '@frontend/shared';
-import { Dispatcher } from '@ngrx/signals/events';
 import { LocationDTO } from '@frontend/open-api';
 
 type DropdownPayload = {
@@ -17,8 +16,6 @@ type DropdownPayload = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocationsDropdown {
-  public readonly dispatcher = inject(Dispatcher);
-
   public readonly country = input.required<string>();
   public readonly city = input.required<string>();
   public readonly locations = input.required<LocationDTO[]>();
