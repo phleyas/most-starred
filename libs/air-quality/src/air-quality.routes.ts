@@ -19,9 +19,9 @@ export const airQualityRoutes: Route[] = [
     ],
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-      { path: 'dashboard', component: Dashboard },
-      { path: 'sensors', component: SensorsTable },
-      { path: 'locations', component: LocationsTable },
+      { path: 'dashboard', title: 'Köstner - Air quality - Dashboard', component: Dashboard },
+      { path: 'sensors', title: 'Köstner - Air quality - Sensors', component: SensorsTable },
+      { path: 'locations', title: 'Köstner - Air quality - Locations', component: LocationsTable },
     ],
   },
 ];

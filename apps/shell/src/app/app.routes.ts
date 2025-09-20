@@ -3,16 +3,13 @@ import { Home } from '../ui/home/home';
 
 export const appRoutes: Route[] = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'air-quality',
-  },
-  {
     path: 'home',
+    title: 'Ignacio Köstner - Home',
     component: Home,
   },
   {
     path: 'trending-repositories',
+    title: 'Köstner - Trending GitHub Repositories',
     loadComponent: () => import('@frontend/repositories').then(m => m.RepositoriesTable),
   },
   {
@@ -24,4 +21,10 @@ export const appRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'air-quality',
+  },
+  { path: '**', redirectTo: '/home' },
 ];
